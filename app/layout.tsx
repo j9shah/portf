@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CursorGlow } from "@/components/CursorGlow";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <CursorGlow />
           <Navbar />
           <main>{children}</main>
           <Footer />

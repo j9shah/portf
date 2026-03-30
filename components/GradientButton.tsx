@@ -16,8 +16,8 @@ interface GradientButtonProps {
 }
 
 const variants = {
-  primary: 'bg-gradient-to-r from-accent-purple to-accent-blue text-white shadow-glow-sm hover:shadow-glow-md',
-  secondary: 'bg-surface-elevated border border-[var(--border-color)] text-text-primary hover:border-accent-purple hover:bg-accent-purple/10',
+  primary: 'bg-accent text-white hover:opacity-90',
+  secondary: 'bg-surface-elevated border border-[var(--border-color)] text-text-primary hover:border-accent hover:bg-accent/10',
   ghost: 'text-text-secondary hover:text-text-primary hover:bg-surface-secondary',
 };
 

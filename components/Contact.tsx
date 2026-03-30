@@ -53,15 +53,15 @@ export function Contact() {
     <div className="space-y-8">
       {/* Contact Intro */}
       <motion.div
-        className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-lg p-8 border border-slate-200 dark:border-slate-700"
-        initial={{ opacity: 0, y: 20 }}
+        className="bg-surface-elevated rounded-lg p-8 border border-[var(--border-color)]"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: 0.1, duration: 0.8 }}
       >
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
+        <h2 className="text-2xl font-semibold mb-4 text-text-primary tracking-wide">
           Let's Connect
         </h2>
-        <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+        <p className="text-text-secondary leading-relaxed">
           I'm always interested in discussing cybersecurity, machine learning,
           and full-stack development opportunities. Feel free to reach out
           through any of the channels below, and I'll be happy to chat!
@@ -80,18 +80,18 @@ export function Contact() {
           return (
             <Link key={link.href} href={link.href} target="_blank">
               <motion.div
-                className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-lg p-6 border border-slate-200 dark:border-slate-700 hover:border-sky-400 dark:hover:border-sky-400 transition-colors cursor-pointer"
+                className="bg-surface-elevated rounded-lg p-6 border border-[var(--border-color)] hover:border-taupe transition-colors cursor-pointer"
                 variants={itemVariants}
-                whileHover={{ scale: 1.02, y: -2 }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <Icon className="w-6 h-6 text-sky-500" />
-                  <h3 className="font-semibold text-slate-900 dark:text-white">
+                  <Icon className="w-6 h-6 text-taupe" />
+                  <h3 className="font-semibold text-text-primary">
                     {link.label}
                   </h3>
                 </div>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-text-secondary">
                   {link.value}
                 </p>
               </motion.div>
@@ -109,32 +109,32 @@ export function Contact() {
       >
         <Link href={socials.github} target="_blank">
           <motion.a
-            className="p-3 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            className="p-3 rounded-lg bg-surface-elevated border border-[var(--border-color)] hover:border-taupe transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="GitHub"
           >
-            <Code className="w-6 h-6" />
+            <Code className="w-6 h-6 text-taupe" />
           </motion.a>
         </Link>
         <Link href={socials.linkedin} target="_blank">
           <motion.a
-            className="p-3 rounded-lg bg-blue-200 dark:bg-blue-900/30 hover:bg-blue-300 dark:hover:bg-blue-900/50 transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            className="p-3 rounded-lg bg-surface-elevated border border-[var(--border-color)] hover:border-taupe transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="LinkedIn"
           >
-            <Share2 className="w-6 h-6 text-blue-700 dark:text-blue-400" />
+            <Share2 className="w-6 h-6 text-taupe" />
           </motion.a>
         </Link>
         <Link href={`mailto:${socials.email}`}>
           <motion.a
-            className="p-3 rounded-lg bg-red-200 dark:bg-red-900/30 hover:bg-red-300 dark:hover:bg-red-900/50 transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            className="p-3 rounded-lg bg-surface-elevated border border-[var(--border-color)] hover:border-taupe transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="Email"
           >
-            <Mail className="w-6 h-6 text-red-700 dark:text-red-400" />
+            <Mail className="w-6 h-6 text-taupe" />
           </motion.a>
         </Link>
       </motion.div>

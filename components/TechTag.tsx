@@ -9,10 +9,10 @@ interface TechTagProps {
 }
 
 const variantStyles = {
-  default: 'bg-accent-purple/10 text-accent-purple border-accent-purple/20',
-  purple: 'bg-accent-purple/10 text-accent-purple border-accent-purple/20',
-  blue: 'bg-accent-blue/10 text-accent-blue border-accent-blue/20',
-  slate: 'bg-accent-slate/10 text-accent-slate border-accent-slate/20',
+  default: 'bg-taupe/10 text-taupe border-taupe/20',
+  purple: 'bg-taupe/10 text-taupe border-taupe/20',
+  blue: 'bg-taupe/10 text-taupe border-taupe/20',
+  slate: 'bg-taupe/10 text-taupe border-taupe/20',
 };
 
 const sizeStyles = {

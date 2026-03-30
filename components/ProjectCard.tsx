@@ -22,7 +22,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div
-      className="bg-gradient-to-br from-surface-elevated to-surface-secondary rounded-lg p-6 border border-border-color hover:border-accent-purple/50 dark:hover:border-accent-purple/50 transition-colors h-full flex flex-col"
+      className="bg-surface-elevated rounded-lg p-6 border border-border-color hover:border-accent transition-colors h-full flex flex-col"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
@@ -39,7 +39,7 @@ export function ProjectCard({
           {tech.map((t) => (
             <span
               key={t}
-              className="px-2 py-1 text-xs bg-accent-purple/10 dark:bg-accent-purple/20 text-accent-purple dark:text-accent-purple rounded font-medium"
+              className="px-2 py-1 text-xs bg-accent/10 text-accent rounded font-medium"
             >
               {t}
             </span>
@@ -64,7 +64,7 @@ export function ProjectCard({
         {demo && (
           <Link href={demo} target="_blank" rel="noopener noreferrer">
             <motion.a
-              className="flex items-center gap-1 px-3 py-2 rounded bg-gradient-to-r from-accent-purple to-accent-blue hover:opacity-90 text-white transition-opacity text-sm font-medium"
+              className="flex items-center gap-1 px-3 py-2 rounded bg-accent hover:opacity-90 text-white transition-opacity text-sm font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

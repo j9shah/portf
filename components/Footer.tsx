@@ -38,7 +38,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-2xl font-bold gradient-text">JS</span>
+            <span className="text-2xl font-semibold text-accent tracking-wide">JS</span>
             <p className="text-text-muted text-sm">
               © {currentYear} Jainam Shah. All rights reserved.
             </p>
@@ -60,7 +60,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-colors"
+                  className="p-2 rounded-lg text-text-muted hover:text-taupe hover:bg-taupe/10 transition-colors"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={social.label}
@@ -80,7 +80,7 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Built with
-            <Heart className="w-3.5 h-3.5 text-accent-blue fill-accent-blue" />
+            <Heart className="w-3.5 h-3.5 text-taupe fill-taupe" />
             using Next.js
           </motion.p>
         </div>

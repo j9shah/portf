@@ -10,14 +10,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        stone: "#F3F1ED",
+        charcoal: "#171717",
+        warmGrey: "#5F5A54",
+        beigeGrey: "#D8D2C8",
+        taupe: "#8A7F73",
         surface: {
           DEFAULT: "var(--bg-primary)",
           elevated: "var(--bg-elevated)",
           secondary: "var(--bg-secondary)",
         },
         accent: {
-          purple: "var(--accent-purple)",
-          blue: "var(--accent-blue)",
+          DEFAULT: "var(--accent)",
           slate: "var(--accent-slate)",
         },
         text: {
@@ -47,15 +51,8 @@ const config: Config = {
         "4xl": "2rem",
       },
       boxShadow: {
-        "glow-sm": "0 0 20px -5px var(--accent-purple)",
-        "glow-md": "0 0 40px -10px var(--accent-purple)",
-        "glow-lg": "0 0 60px -15px var(--accent-purple)",
         "soft": "0 4px 20px -2px rgba(0, 0, 0, 0.3)",
         "soft-lg": "0 8px 40px -4px rgba(0, 0, 0, 0.4)",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-mesh": "radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%), radial-gradient(at 0% 50%, rgba(148, 163, 184, 0.08) 0px, transparent 50%)",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out forwards",

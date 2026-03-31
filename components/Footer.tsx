@@ -26,20 +26,20 @@ export function Footer() {
   ];
 
   return (
-    <footer className="py-10 px-6 border-t border-[var(--border-color)]">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+    <footer className="py-10 sm:py-12 border-t border-border-color/50">
+      <div className="layout-container">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4">
           {/* Logo & Copyright */}
           <motion.div
-            className="flex flex-col items-center md:items-start gap-1.5"
+            className="flex flex-col items-center sm:items-start gap-1.5"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
           >
-            <span className="text-xl font-semibold text-accent tracking-wide">JS</span>
-            <p className="text-text-muted text-sm">
-              © {currentYear} Jainam Shah. All rights reserved.
+            <span className="text-lg font-semibold text-accent tracking-tight">JS</span>
+            <p className="text-text-muted text-xs">
+              © {currentYear} Jainam Shah
             </p>
           </motion.div>
 
@@ -49,7 +49,7 @@ export function Footer() {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             {socialLinks.map((social) => {
               const Icon = social.icon;
@@ -59,12 +59,12 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl text-text-muted hover:text-accent hover:bg-accent-subtle transition-all duration-200"
+                  className="p-2.5 rounded-lg text-text-muted hover:text-accent hover:bg-accent-subtle transition-all duration-200"
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={social.label}
                 >
-                  <Icon size={18} />
+                  <Icon size={17} />
                 </motion.a>
               );
             })}
@@ -72,15 +72,13 @@ export function Footer() {
 
           {/* Built with */}
           <motion.p
-            className="flex items-center gap-1.5 text-text-muted text-sm"
+            className="text-text-muted text-xs"
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Built with
-            <span className="text-base" role="img" aria-label="otter">🦦</span>
-            using Next.js
+            Built with Next.js
           </motion.p>
         </div>
       </div>

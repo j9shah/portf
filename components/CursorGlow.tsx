@@ -1,16 +1,23 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 export function CursorGlow() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const rafRef = useRef<number>();
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    setPosition({ x: e.clientX, y: e.clientY });
-    if (!isVisible) setIsVisible(true);
+    // Use requestAnimationFrame for smoother cursor updates
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    rafRef.current = requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
+    });
   }, [isVisible]);
 
   const handleMouseEnter = useCallback(() => {
@@ -22,7 +29,6 @@ export function CursorGlow() {
   }, []);
 
   useEffect(() => {
-    // Only enable on desktop
     const checkDesktop = () => {
       setIsDesktop(window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches);
     };
@@ -36,19 +42,22 @@ export function CursorGlow() {
   useEffect(() => {
     if (!isDesktop) return;
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Track hoverable elements
-    const interactiveElements = document.querySelectorAll(
-      'a, button, [role="button"], input, textarea, select, [data-cursor-hover]'
-    );
+    // Use MutationObserver to handle dynamically added elements
+    const addListeners = () => {
+      const interactiveElements = document.querySelectorAll(
+        'a, button, [role="button"], input, textarea, select, [data-cursor-hover]'
+      );
+      interactiveElements.forEach((el) => {
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
+      });
+      return interactiveElements;
+    };
 
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
-    });
+    const elements = addListeners();
 
-    // Handle mouse leaving window
     const handleMouseOut = (e: MouseEvent) => {
       if (!e.relatedTarget) {
         setIsVisible(false);
@@ -59,19 +68,21 @@ export function CursorGlow() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseout', handleMouseOut);
-      interactiveElements.forEach((el) => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      elements.forEach((el) => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
   }, [isDesktop, handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
-  // Don't render on mobile/tablet or until mouse moves
   if (!isDesktop) return null;
 
   return (
     <>
-      {/* Outer ring */}
+      {/* Outer ring - refined */}
       <div
         className="fixed pointer-events-none z-[9999] mix-blend-difference"
         style={{
@@ -79,16 +90,16 @@ export function CursorGlow() {
           top: position.y,
           transform: 'translate(-50%, -50%)',
           opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.3s ease, width 0.2s ease, height 0.2s ease',
+          transition: 'opacity 0.25s ease',
         }}
       >
         <div
           style={{
-            width: isHovering ? '48px' : '32px',
-            height: isHovering ? '48px' : '32px',
+            width: isHovering ? '40px' : '28px',
+            height: isHovering ? '40px' : '28px',
             borderRadius: '50%',
-            border: '1px solid rgba(232, 224, 212, 0.5)',
-            transition: 'width 0.2s cubic-bezier(0.4, 0, 0.2, 1), height 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+            border: '1px solid rgba(237, 230, 220, 0.45)',
+            transition: 'width 0.18s cubic-bezier(0.4, 0, 0.2, 1), height 0.18s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         />
       </div>
@@ -101,33 +112,33 @@ export function CursorGlow() {
           top: position.y,
           transform: 'translate(-50%, -50%)',
           opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.3s ease',
+          transition: 'opacity 0.25s ease',
         }}
       >
         <div
           style={{
-            width: isHovering ? '6px' : '4px',
-            height: isHovering ? '6px' : '4px',
+            width: isHovering ? '5px' : '3px',
+            height: isHovering ? '5px' : '3px',
             borderRadius: '50%',
             backgroundColor: 'var(--accent)',
-            transition: 'width 0.15s ease, height 0.15s ease',
+            transition: 'width 0.12s ease, height 0.12s ease',
           }}
         />
       </div>
 
-      {/* Subtle glow trail */}
+      {/* Subtle glow - more refined */}
       <div
         className="fixed pointer-events-none z-10"
         style={{
           left: position.x,
           top: position.y,
           transform: 'translate(-50%, -50%)',
-          width: '200px',
-          height: '200px',
-          background: 'radial-gradient(circle, var(--accent-subtle) 0%, transparent 70%)',
-          opacity: isVisible ? 0.6 : 0,
-          transition: 'opacity 0.5s ease',
-          filter: 'blur(40px)',
+          width: '150px',
+          height: '150px',
+          background: 'radial-gradient(circle, var(--accent-subtle) 0%, transparent 65%)',
+          opacity: isVisible ? 0.5 : 0,
+          transition: 'opacity 0.4s ease',
+          filter: 'blur(30px)',
         }}
       />
 

@@ -9,31 +9,31 @@
     --bg-secondary: #eceae5;
     --bg-elevated: #ffffff;
     --text-primary: #1a1816;
-    --text-secondary: #5c564e;
-    --text-muted: #8a8279;
-    --border-color: #d4cfc6;
-    --accent: #9e8f7a;
-    --accent-hover: #b3a28f;
-    --accent-subtle: rgba(158, 143, 122, 0.1);
+    --text-secondary: #4a453e;
+    --text-muted: #7a756d;
+    --border-color: #d4cfc5;
+    --accent: #8a7b66;
+    --accent-hover: #9e8f7a;
+    --accent-subtle: rgba(138, 123, 102, 0.12);
   }
 
   .dark {
-    /* Dark mode - refined charcoal with warmth */
-    --bg-primary: #0b0d10;
-    --bg-secondary: #101214;
-    --bg-elevated: #16181c;
-    --text-primary: #e8e0d4;
-    --text-secondary: #a79f95;
-    --text-muted: #6b655d;
-    --border-color: #2a2d31;
-    --accent: #b3a28f;
-    --accent-hover: #c4b5a3;
-    --accent-subtle: rgba(179, 162, 143, 0.08);
+    /* Dark mode - refined minimal palette for CS portfolio */
+    --bg-primary: #0a0c0f;
+    --bg-secondary: #0f1115;
+    --bg-elevated: #1a1d24;
+    --text-primary: #f0e9df;
+    --text-secondary: #bab3a8;
+    --text-muted: #827c74;
+    --border-color: #2a2e36;
+    --accent: #c9baa4;
+    --accent-hover: #ddd0bc;
+    --accent-subtle: rgba(201, 186, 164, 0.1);
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -43,13 +43,13 @@
   }
 
   ::selection {
-    background: rgba(179, 162, 143, 0.25);
+    background: rgba(196, 181, 160, 0.35);
     color: var(--text-primary);
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -58,7 +58,7 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--border-color);
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -67,39 +67,55 @@
 }
 
 @layer components {
+  /* ===== UNIFIED LAYOUT SYSTEM ===== */
+  
+  /* Master container - used by all sections for consistent alignment */
+  .layout-container {
+    @apply w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-10;
+  }
+
+  /* Section wrapper with consistent vertical rhythm */
+  .section {
+    @apply py-20 sm:py-24 md:py-28;
+  }
+
+  /* Legacy support - maps to new system */
+  .section-container {
+    @apply layout-container;
+  }
+
+  /* ===== COMPONENT STYLES ===== */
+
   .glass {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
   }
 
   .dark .glass {
-    background: rgba(11, 13, 16, 0.8);
+    background: rgba(10, 12, 15, 0.85);
   }
 
   .card {
     background: var(--bg-elevated);
     border: 1px solid var(--border-color);
-    border-radius: 0.875rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0.75rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card:hover {
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent-subtle);
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.15);
   }
 
-  .section {
-    @apply py-24 md:py-32 px-6;
-  }
-
-  .section-container {
-    @apply max-w-5xl mx-auto;
+  .dark .card:hover {
+    box-shadow: 0 8px 32px -6px rgba(0, 0, 0, 0.6);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
   }
 
   /* Consistent link styling */

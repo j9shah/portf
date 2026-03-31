@@ -9,26 +9,30 @@ export function Timeline() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+      transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
     },
   };
 
+  // Separate featured (tech) and other experiences
+  const featuredExperiences = experiences.filter(exp => exp.featured);
+  const otherExperiences = experiences.filter(exp => !exp.featured);
+
   return (
     <section id="experience" className="section">
-      <div className="section-container">
+      <div className="layout-container">
         <motion.h2 
-          className="text-2xl md:text-3xl font-semibold text-text-primary mb-10 tracking-tight"
-          initial={{ opacity: 0, y: 8 }}
+          className="text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary mb-8 sm:mb-10 tracking-tight"
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
@@ -37,66 +41,137 @@ export function Timeline() {
         </motion.h2>
 
         <motion.div
-          className="relative max-w-4xl"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          {/* Vertical timeline bar */}
-          <div className="absolute left-3 md:left-4 top-3 bottom-3 w-px bg-[var(--border-color)]" />
-
-          {/* Experience cards */}
-          <div className="space-y-8">
-            {experiences.map((exp) => (
+          {/* Featured/Technical Experience */}
+          <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10">
+            {featuredExperiences.map((exp) => (
               <motion.div
                 key={exp.id}
                 variants={cardVariants}
-                className="relative pl-10 md:pl-12"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-1.5 md:left-2.5 top-2 w-3 h-3 rounded-full bg-accent border-2 border-[var(--bg-primary)]" />
-
                 <motion.div
-                  className="bg-surface-elevated border border-[var(--border-color)] rounded-2xl p-5 md:p-6 hover:border-accent/40 transition-all duration-300"
+                  className="card p-4 sm:p-5 md:p-6 relative overflow-hidden"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
+                  {/* Subtle left accent bar */}
+                  <div className="absolute left-0 top-4 bottom-4 w-0.5 bg-accent/40 rounded-full" />
+                  
                   {/* Header */}
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-3">
-                    <div>
-                      <h3 className="text-lg font-semibold text-text-primary">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-3 mb-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-text-primary leading-tight">
                         {exp.position}
                       </h3>
-                      <p className="text-sm text-text-secondary">
-                        {exp.company}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
+                        <span className="text-sm text-text-secondary">{exp.company}</span>
+                        {exp.type && (
+                          <>
+                            <span className="text-text-muted text-xs">·</span>
+                            <span className="text-xs text-text-muted">{exp.type}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <span className="text-sm text-text-muted">
-                      {exp.period}
-                    </span>
+                    <div className="flex flex-col items-start sm:items-end gap-0.5">
+                      <span className="text-xs sm:text-sm text-text-muted whitespace-nowrap">
+                        {exp.period}
+                      </span>
+                      {exp.duration && (
+                        <span className="text-xs text-text-muted/70">{exp.duration}</span>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Location */}
+                  {exp.location && (
+                    <p className="text-xs text-text-muted mb-2 flex items-center gap-1">
+                      <span>{exp.location}</span>
+                      {exp.workMode && (
+                        <>
+                          <span>·</span>
+                          <span>{exp.workMode}</span>
+                        </>
+                      )}
+                    </p>
+                  )}
 
                   {/* Description */}
-                  <p className="text-text-secondary text-sm leading-relaxed mb-4">
-                    {exp.description}
-                  </p>
+                  {exp.description && (
+                    <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                      {exp.description}
+                    </p>
+                  )}
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 text-xs font-medium rounded-lg bg-accent-subtle text-accent border border-accent/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  {exp.technologies && exp.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {exp.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-0.5 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-[var(--accent)]/15"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               </motion.div>
             ))}
           </div>
+
+          {/* Other Experience - More compact */}
+          {otherExperiences.length > 0 && (
+            <>
+              <motion.h3
+                className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4"
+                variants={cardVariants}
+              >
+                Other Experience
+              </motion.h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {otherExperiences.map((exp) => (
+                  <motion.div
+                    key={exp.id}
+                    variants={cardVariants}
+                  >
+                    <motion.div
+                      className="card p-4 h-full"
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <h4 className="text-sm sm:text-base font-semibold text-text-primary leading-tight">
+                        {exp.position}
+                      </h4>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5 mb-2">
+                        <span className="text-sm text-text-secondary">{exp.company}</span>
+                        {exp.type && (
+                          <>
+                            <span className="text-text-muted text-xs">·</span>
+                            <span className="text-xs text-text-muted">{exp.type}</span>
+                          </>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-text-muted">
+                        <span>{exp.period}</span>
+                        {exp.duration && <span>{exp.duration}</span>}
+                      </div>
+                      {exp.description && (
+                        <p className="text-text-muted text-xs leading-relaxed mt-2 line-clamp-2">
+                          {exp.description}
+                        </p>
+                      )}
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
         </motion.div>
       </div>
     </section>

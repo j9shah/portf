@@ -84,32 +84,38 @@ function ProjectCard({ project }: { project: Project }) {
         </p>
       </div>
 
-      {/* Features - 2 bullet highlights */}
-      {project.features && project.features.length > 0 && (
-        <ul className="mb-4 space-y-1.5">
-          {project.features.slice(0, 2).map((feature, i) => (
-            <li key={i} className="flex items-start gap-2 text-xs text-text-muted">
-              <Zap size={12} className="w-3 h-3 text-accent/60 shrink-0 mt-1" />
-              <span className="leading-relaxed">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Tech stack - concise, max 5-6 tags */}
-      <div className="flex flex-wrap gap-1.5 mb-4 pb-4 border-b border-border-color/40">
-        {project.tech.slice(0, 6).map((tech) => (
-          <span
-            key={tech}
-            className="px-2.5 py-1 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"
-          >
-            {tech}
-          </span>
-        ))}
+      {/* Features - 2 bullet highlights with consistent height */}
+      <div className="mb-4 min-h-[52px] flex flex-col justify-start">
+        {project.features && project.features.length > 0 ? (
+          <ul className="space-y-1.5">
+            {project.features.slice(0, 2).map((feature, i) => (
+              <li key={i} className="flex items-start gap-2 text-xs text-text-muted">
+                <Zap size={12} className="w-3 h-3 text-accent/60 shrink-0 mt-1" />
+                <span className="leading-relaxed">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="h-full"></div>
+        )}
       </div>
 
-      {/* Action buttons - styled as clickable buttons */}
-      <div className="flex items-center gap-2 mt-auto">
+      {/* Tech stack + Divider + Action buttons - all pushed to bottom */}
+      <div className="mt-auto">
+        {/* Tech stack - concise, max 5-6 tags */}
+        <div className="flex flex-wrap gap-1.5 pb-4 border-b border-border-color/40">
+          {project.tech.slice(0, 6).map((tech) => (
+            <span
+              key={tech}
+              className="px-2.5 py-1 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Action buttons - styled as clickable buttons */}
+        <div className="flex items-center gap-2 pt-4">
         {project.github && (
           <a
             href={project.github}
@@ -146,6 +152,7 @@ function ProjectCard({ project }: { project: Project }) {
             <ExternalLink className="w-4 h-4" />
           </a>
         )}
+        </div>
       </div>
     </motion.div>
   );

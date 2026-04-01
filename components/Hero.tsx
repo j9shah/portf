@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { personalInfo } from '@/lib/data';
 import { SignatureGraphic } from './SignatureGraphic';
 import { InteractiveTether } from './InteractiveTether';
+import { FloatingBubbles } from './FloatingBubbles';
 import { Sparkles } from 'lucide-react';
 
 const navLinks = [
@@ -26,6 +27,11 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center">
       <SignatureGraphic />
+      
+      {/* Floating bubbles/stars effect - only when easter egg is active */}
+      <AnimatePresence>
+        {showTether && <FloatingBubbles />}
+      </AnimatePresence>
       
       <AnimatePresence>
         {showTether && <InteractiveTether />}

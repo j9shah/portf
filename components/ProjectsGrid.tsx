@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { projects } from '@/lib/data';
+import { projects, type Project } from '@/lib/data';
 import { Code2, ExternalLink, Zap } from 'lucide-react';
 
 export function ProjectsGrid() {
@@ -59,7 +59,7 @@ export function ProjectsGrid() {
   );
 }
 
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.div
       className="card p-5 h-full flex flex-col group"

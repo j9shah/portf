@@ -10,17 +10,24 @@ export function InteractiveTether() {
   const [isDragging, setIsDragging] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [pathD, setPathD] = useState('M 0 0 C 30 50, 30 150, 0 200');
+  const [pathD, setPathD] = useState('M 0 0 L 0 250');
   const [hasInteracted, setHasInteracted] = useState(false);
 
   // Orb position with spring physics - loose floppy dangling wire feel
   const springConfig = { stiffness: 40, damping: 4, mass: 2 };
   const orbX = useSpring(0, springConfig);
-  const orbY = useSpring(200, springConfig);
+  const orbY = useSpring(250, springConfig); // Updated to match new rest position
+  
+  // Disco ball rotation state
+  const [rotation, setRotation] = useState(0);
+  
+  // Track current orb position for rendering
+  const [currentOrbX, setCurrentOrbX] = useState(0);
+  const [currentOrbY, setCurrentOrbY] = useState(250);
 
   // Rest position offset from anchor (dangling below the otter)
   const restOffsetX = 0;
-  const restOffsetY = 200;
+  const restOffsetY = 250; // Adjusted to prevent hiding behind name
 
   // Update path whenever orb moves - creates a dangling wire effect
   useEffect(() => {
@@ -31,25 +38,12 @@ export function InteractiveTether() {
       const ox = orbX.get();
       const oy = orbY.get();
       
-      // Wire becomes straighter when stretched, loose when slack
-      const distance = Math.sqrt(ox * ox + oy * oy);
-      const restLength = 200;
-      const stretchRatio = distance / restLength;
+      // Update current position for rendering
+      setCurrentOrbX(ox);
+      setCurrentOrbY(oy);
       
-      // Sag increases for slack wire (curves outward), decreases when stretched
-      const maxSag = 50;
-      const sag = stretchRatio > 1 ? maxSag / stretchRatio : maxSag * (2 - stretchRatio);
-      
-      // When stretched, control points move closer to a straight line
-      const straightness = Math.min(stretchRatio, 3) / 3;
-      
-      // Control points for dangling curve (sags to the right naturally)
-      const cp1x = ox * 0.2 + sag * (1 - straightness) * 0.8;
-      const cp1y = oy * 0.33;
-      const cp2x = ox * 0.7 + sag * (1 - straightness) * 0.4;
-      const cp2y = oy * 0.66;
-
-      setPathD(`M 0 0 C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${ox} ${oy}`);
+      // Completely straight wire - no curve or sag
+      setPathD(`M 0 0 L ${ox} ${oy}`);
     }
 
     return () => {
@@ -90,35 +84,29 @@ export function InteractiveTether() {
     };
   }, []);
 
-  // Subtle idle floating animation
+  // Disco ball rotation when static (not dragging)
   useEffect(() => {
     if (prefersReducedMotion || isDragging || isMobile) return;
 
     let animationId: number;
     const startTime = Date.now();
 
-    const animateIdle = () => {
+    const animateRotation = () => {
       if (isDragging) return;
       
       const elapsed = (Date.now() - startTime) / 1000;
-      const floatX = Math.sin(elapsed * 0.4) * 4;
-      const floatY = Math.cos(elapsed * 0.25) * 5;
+      // Constant rotation speed
+      setRotation((elapsed * 45) % 360); // 45 degrees per second
 
-      orbX.set(restOffsetX + floatX);
-      orbY.set(restOffsetY + floatY);
-
-      animationId = requestAnimationFrame(animateIdle);
+      animationId = requestAnimationFrame(animateRotation);
     };
 
-    const timeout = setTimeout(() => {
-      animateIdle();
-    }, 1500);
+    animateRotation();
 
     return () => {
-      clearTimeout(timeout);
       if (animationId) cancelAnimationFrame(animationId);
     };
-  }, [prefersReducedMotion, isDragging, isMobile, orbX, orbY]);
+  }, [prefersReducedMotion, isDragging, isMobile]);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     if (isMobile) return;
@@ -138,7 +126,7 @@ export function InteractiveTether() {
     const mouseX = e.clientX - rect.left - anchorPos.x;
     const mouseY = e.clientY - rect.top - anchorPos.y;
 
-    // Allow stretching up to 1200px - 6x the resting length for max rubber band stretch
+    // Allow stretching up to 1200px - 3x the resting length for max rubber band stretch
     const maxRadius = 1200;
     const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
     
@@ -194,6 +182,13 @@ export function InteractiveTether() {
             <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.7" />
             <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.3" />
           </linearGradient>
+          
+          {/* Disco ball gradient - shiny metallic effect */}
+          <radialGradient id="discoBallGradient" cx="35%" cy="35%">
+            <stop offset="0%" stopColor="white" stopOpacity="0.9" />
+            <stop offset="40%" stopColor="var(--accent)" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.6" />
+          </radialGradient>
           
           {/* Soft glow filter */}
           <filter id="orbGlow" x="-100%" y="-100%" width="300%" height="300%">
@@ -263,25 +258,28 @@ export function InteractiveTether() {
             transition={{ duration: 0.8, delay: 1 }}
           />
 
-          {/* Outer glow ring - larger */}
+          {/* Outer glow ring - larger disco light aura */}
           <motion.circle
-            cx={orbX}
-            cy={orbY}
-            r={isHovering || isDragging ? 24 : 18}
+            cx={currentOrbX}
+            cy={currentOrbY}
+            r={isHovering || isDragging ? 32 : 28}
             fill="var(--accent)"
-            opacity={isHovering || isDragging ? 0.15 : 0.08}
+            opacity={isHovering || isDragging ? 0.25 : 0.15}
             filter={isDragging ? "url(#orbGlowActive)" : "url(#orbGlow)"}
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: isHovering || isDragging ? 0.15 : 0.08 }}
-            transition={{ duration: 0.3 }}
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: isHovering || isDragging ? [0.25, 0.3, 0.25] : [0.15, 0.2, 0.15]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
           />
 
-          {/* Main orb body - interactive, larger */}
+          {/* Main disco ball body - interactive */}
           <motion.circle
-            cx={orbX}
-            cy={orbY}
-            r={isHovering || isDragging ? 12 : 10}
-            fill="var(--accent)"
+            cx={currentOrbX}
+            cy={currentOrbY}
+            r={isHovering || isDragging ? 16 : 14}
+            fill="url(#discoBallGradient)"
             className="pointer-events-auto cursor-grab active:cursor-grabbing"
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
@@ -293,18 +291,65 @@ export function InteractiveTether() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
               scale: 1, 
-              opacity: isHovering || isDragging ? 0.75 : 0.55 
+              opacity: 0.9
             }}
             transition={{ duration: 0.5, delay: 1.2 }}
           />
 
-          {/* Inner bright core - larger */}
+          {/* Rotating disco ball facets - creates sparkle effect */}
+          {!isDragging && (
+            <g transform={`translate(${currentOrbX}, ${currentOrbY})`}>
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((baseAngle, i) => {
+                const angle = (baseAngle + rotation) % 360;
+                const rad = (angle * Math.PI) / 180;
+                const distance = 10;
+                const x = Math.cos(rad) * distance;
+                const y = Math.sin(rad) * distance;
+                const opacity = Math.abs(Math.cos(rad)) * 0.7 + 0.3;
+                
+                return (
+                  <circle
+                    key={i}
+                    cx={x}
+                    cy={y}
+                    r={2}
+                    fill="white"
+                    opacity={opacity}
+                    filter="url(#orbGlow)"
+                  />
+                );
+              })}
+              
+              {/* Central bright spots that pulse */}
+              {[0, 120, 240].map((baseAngle, i) => {
+                const angle = (baseAngle + rotation * 0.5) % 360;
+                const rad = (angle * Math.PI) / 180;
+                const distance = 6;
+                const x = Math.cos(rad) * distance;
+                const y = Math.sin(rad) * distance;
+                
+                return (
+                  <circle
+                    key={`bright-${i}`}
+                    cx={x}
+                    cy={y}
+                    r={3}
+                    fill="var(--accent)"
+                    opacity={0.8}
+                    filter="url(#orbGlowActive)"
+                  />
+                );
+              })}
+            </g>
+          )}
+
+          {/* Inner bright core - disco ball center */}
           <motion.circle
-            cx={orbX}
-            cy={orbY}
-            r={4}
-            fill="var(--bg-elevated)"
-            opacity={isHovering || isDragging ? 0.8 : 0.5}
+            cx={currentOrbX}
+            cy={currentOrbY}
+            r={5}
+            fill="white"
+            opacity={isHovering || isDragging ? 0.9 : 0.7}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.4, delay: 1.3 }}

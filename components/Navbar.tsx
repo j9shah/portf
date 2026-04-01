@@ -46,9 +46,14 @@ export function Navbar() {
 
   // Use IntersectionObserver for more reliable scroll tracking
   useEffect(() => {
-    // Scroll listener for navbar background
+    // Scroll listener for navbar background and hero section detection
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // If we're near the top (hero section), clear active section
+      if (window.scrollY < 200) {
+        setActiveSection(null);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -65,18 +70,21 @@ export function Navbar() {
         }
       });
 
-      // Find the section with highest visibility
-      let maxRatio = 0;
-      let activeId = '';
-      visibleSections.forEach((ratio, id) => {
-        if (ratio > maxRatio) {
-          maxRatio = ratio;
-          activeId = id;
-        }
-      });
+      // Only update active section if we're not in the hero area
+      if (window.scrollY >= 200) {
+        // Find the section with highest visibility
+        let maxRatio = 0;
+        let activeId = '';
+        visibleSections.forEach((ratio, id) => {
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            activeId = id;
+          }
+        });
 
-      if (activeId) {
-        setActiveSection(`#${activeId}`);
+        if (activeId) {
+          setActiveSection(`#${activeId}`);
+        }
       }
     };
 

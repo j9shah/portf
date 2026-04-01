@@ -24,7 +24,7 @@ export function Footer() {
 
           {/* Right: Message */}
           <p className="text-text-secondary text-sm">
-            Feel free to get in touch, I'd love to connect!!
+            Thanks for scrolling this far :)!
           </p>
         </motion.div>
       </div>

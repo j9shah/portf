@@ -12,6 +12,7 @@ export function InteractiveTether() {
   const [isMobile, setIsMobile] = useState(false);
   const [pathD, setPathD] = useState('M 0 0 L 0 250');
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [showHint, setShowHint] = useState(true);
 
   // Orb position with spring physics - loose floppy dangling wire feel
   const springConfig = { stiffness: 40, damping: 4, mass: 2 };
@@ -114,6 +115,7 @@ export function InteractiveTether() {
     e.stopPropagation();
     setIsDragging(true);
     setHasInteracted(true);
+    setShowHint(false);
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   }, [isMobile]);
 
@@ -156,18 +158,34 @@ export function InteractiveTether() {
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 5 }}
     >
-      {/* Persistent hint in bottom right - changes message after interaction */}
+      {/* Hint button that dismisses when orb is clicked */}
+      {showHint && (
+        <motion.button
+          className="absolute top-8 left-8 pointer-events-auto bg-accent/10 hover:bg-accent/20 dark:bg-accent/10 dark:hover:bg-accent/20 light:bg-[#f8f6f3]/95 light:hover:bg-[#f0ece6] backdrop-blur-sm border border-accent/30 dark:border-accent/30 light:border-[#d6d3d1]/60 rounded-lg px-4 py-3 text-sm md:text-base text-text-secondary dark:text-text-secondary light:text-[#44403c] shadow-lg transition-colors cursor-pointer"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          onClick={() => setShowHint(false)}
+        >
+          <span className="text-accent dark:text-accent light:text-[#92400e] font-medium">💡 Hint:</span>
+          <br />
+          <span>Drag the orb and watch it snap back</span>
+        </motion.button>
+      )}
+
+      {/* Persistent hint in bottom right - larger and responsive */}
       <motion.div
-        className="absolute bottom-8 right-8 pointer-events-none"
+        className="absolute bottom-4 right-4 md:bottom-8 md:right-8 pointer-events-none"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 2 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
       >
-        <div className="bg-bg-elevated/80 backdrop-blur-sm border border-accent/20 rounded-lg px-3 py-2 text-xs text-text-muted max-w-[160px] shadow-lg">
-          <span className="text-accent">✨ Easter egg unlocked!</span>
+        <div className="bg-bg-elevated/80 dark:bg-bg-elevated/80 light:bg-[#f8f6f3]/95 backdrop-blur-sm border border-accent/20 dark:border-accent/20 light:border-[#d6d3d1]/60 rounded-lg px-4 py-3 md:px-6 md:py-4 text-sm md:text-base lg:text-lg max-w-[90vw] md:max-w-[500px] lg:max-w-[600px] shadow-lg">
+          <span className="text-accent dark:text-accent light:text-[#92400e] font-semibold text-base md:text-lg lg:text-xl">✨ Easter egg unlocked!</span>
           <br />
-          <span className="text-text-secondary">
-            {hasInteracted ? "Nice! Try stretching it further" : "Drag the orb and watch it snap back"}
+          <span className="text-text-secondary dark:text-text-secondary light:text-[#44403c]">
+            {hasInteracted ? "Noice!! Try stretching it further" : "Drag the orb and watch it snap back"}
           </span>
         </div>
       </motion.div>

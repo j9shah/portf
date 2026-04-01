@@ -62,7 +62,7 @@ export function Hero() {
       <div className="layout-container flex flex-col items-center text-center relative z-10">
         {/* Name */}
         <motion.h1
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-text-primary tracking-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-text-primary dark:text-text-primary light:text-gray-800 tracking-tight"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
@@ -81,7 +81,7 @@ export function Hero() {
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="text-text-secondary hover:text-accent transition-colors duration-200 text-xs sm:text-sm font-medium tracking-wide relative group"
+              className="text-text-secondary dark:text-text-secondary light:text-gray-600 hover:text-accent transition-colors duration-200 text-xs sm:text-sm font-medium tracking-wide relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-200 group-hover:w-full" />

@@ -28,10 +28,10 @@ export function ExperienceTimeline() {
   };
 
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="pt-8 pb-20 sm:pb-24 md:pb-28">
       <div className="layout-container">
         <motion.h2
-          className="text-2xl md:text-3xl font-semibold text-text-primary mb-16 tracking-tight text-center"
+          className="text-2xl md:text-3xl font-semibold text-text-primary mb-12 tracking-tight text-center"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

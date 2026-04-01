@@ -25,10 +25,10 @@ export function ProjectsGrid() {
   };
 
   return (
-    <section id="projects" className="section mb-16">
+    <section id="projects" className="pt-8 pb-20 sm:pb-24 md:pb-28 mb-16">
       <div className="layout-container">
         <motion.h2
-          className="text-2xl md:text-3xl font-semibold text-text-primary mb-16 tracking-tight text-center"
+          className="text-2xl md:text-3xl font-semibold text-text-primary mb-12 tracking-tight text-center"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

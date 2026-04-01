@@ -4,12 +4,10 @@ const nextConfig = {
   compress: true,
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  swcMinify: true,
   
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
-    optimization: 'auto',
   },
   
   // Optimize package imports for Vercel builds

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { projects, type Project } from '@/lib/data';
-import { Code2, ExternalLink, Zap } from 'lucide-react';
+import { Code2, ExternalLink, Zap, Award } from 'lucide-react';
 
 export function ProjectsGrid() {
   const cardVariants = {
@@ -39,7 +39,7 @@ export function ProjectsGrid() {
 
         {/* Consistent grid layout */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -62,7 +62,8 @@ export function ProjectsGrid() {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.div
-      className="card p-5 h-full flex flex-col group"
+      className="card p-6 h-full flex flex-col group"
+      style={{ minHeight: '340px' }}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
@@ -83,10 +84,10 @@ function ProjectCard({ project }: { project: Project }) {
         </p>
       </div>
 
-      {/* Features - 2-3 bullet highlights */}
+      {/* Features - 2 bullet highlights */}
       {project.features && project.features.length > 0 && (
-        <ul className="mb-4 space-y-2 flex-grow">
-          {project.features.slice(0, 3).map((feature, i) => (
+        <ul className="mb-4 space-y-1.5">
+          {project.features.slice(0, 2).map((feature, i) => (
             <li key={i} className="flex items-start gap-2 text-xs text-text-muted">
               <Zap size={12} className="w-3 h-3 text-accent/60 shrink-0 mt-1" />
               <span className="leading-relaxed">{feature}</span>
@@ -107,18 +108,30 @@ function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      {/* Action buttons - clean, minimal */}
-      <div className="flex items-center gap-3 mt-auto">
+      {/* Action buttons - styled as clickable buttons */}
+      <div className="flex items-center gap-2 mt-auto">
         {project.github && (
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-xs font-medium tracking-wide group/link"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
             title="View source code"
           >
             <Code2 className="w-4 h-4" />
             <span>Code</span>
+          </a>
+        )}
+        {project.devpost && (
+          <a
+            href={project.devpost}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
+            title="View on Devpost"
+          >
+            <Award className="w-4 h-4" />
+            <span>Devpost</span>
           </a>
         )}
         {project.demo && (
@@ -126,7 +139,7 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-xs font-medium tracking-wide group/link ml-auto"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
             title="View live demo"
           >
             <span>Demo</span>

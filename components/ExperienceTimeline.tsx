@@ -141,6 +141,7 @@ function TimelineCard({ exp, align, featured }: {
       className={`
         card p-6 relative group
         ${align === 'left' ? 'text-left' : 'text-right'}
+        dark:border-0 border border-black/20
       `}
       whileHover={{ y: -2, borderColor: 'var(--accent)' }}
       transition={{ duration: 0.2 }}
@@ -197,7 +198,7 @@ function TimelineCard({ exp, align, featured }: {
 function CompactCard({ exp }: { exp: any }) {
   return (
     <motion.div
-      className="bg-surface-elevated rounded-xl p-4 h-full transition-all duration-200"
+      className="bg-surface-elevated rounded-xl p-4 h-full transition-all duration-200 dark:border-0 border border-black/20"
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >

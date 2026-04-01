@@ -31,7 +31,7 @@ export function ContactSection() {
 
           {/* Subheading */}
           <p className="text-text-secondary text-center text-base leading-relaxed mb-12">
-            Feel free to reach out for opportunities, collaborations, or just to chat.
+            Feel free to reach out, I’m always down for a good conversation!!
           </p>
 
           {/* Email with copy */}

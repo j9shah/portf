@@ -180,7 +180,7 @@ function TimelineCard({ exp, align, featured }: {
           flex flex-wrap gap-1.5
           ${align === 'right' ? 'justify-end' : 'justify-start'}
         `}>
-          {exp.technologies.slice(0, 5).map((tech) => (
+          {exp.technologies.slice(0, 5).map((tech: string) => (
             <span
               key={tech}
               className="px-2 py-0.5 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"

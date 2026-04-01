@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Otter favicon - cute minimalist design -->
+  <defs>
+    <linearGradient id="otterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B7355"/>
+      <stop offset="100%" style="stop-color:#6B5344"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Body/Head -->
+  <ellipse cx="50" cy="52" rx="35" ry="32" fill="url(#otterGrad)"/>
+  
+  <!-- Ears -->
+  <circle cx="22" cy="30" r="10" fill="#6B5344"/>
+  <circle cx="78" cy="30" r="10" fill="#6B5344"/>
+  <circle cx="22" cy="30" r="6" fill="#D4C4B0"/>
+  <circle cx="78" cy="30" r="6" fill="#D4C4B0"/>
+  
+  <!-- Face patch (lighter fur) -->
+  <ellipse cx="50" cy="58" rx="22" ry="18" fill="#D4C4B0"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="38" cy="48" rx="6" ry="7" fill="#1a1a1a"/>
+  <ellipse cx="62" cy="48" rx="6" ry="7" fill="#1a1a1a"/>
+  <circle cx="40" cy="46" r="2" fill="#fff"/>
+  <circle cx="64" cy="46" r="2" fill="#fff"/>
+  
+  <!-- Nose -->
+  <ellipse cx="50" cy="60" rx="8" ry="5" fill="#1a1a1a"/>
+  <ellipse cx="50" cy="59" rx="3" ry="2" fill="#4a4a4a"/>
+  
+  <!-- Whisker dots -->
+  <circle cx="35" cy="62" r="1.5" fill="#8B7355"/>
+  <circle cx="30" cy="65" r="1.5" fill="#8B7355"/>
+  <circle cx="65" cy="62" r="1.5" fill="#8B7355"/>
+  <circle cx="70" cy="65" r="1.5" fill="#8B7355"/>
+  
+  <!-- Mouth -->
+  <path d="M 44 68 Q 50 73 56 68" stroke="#6B5344" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

@@ -18,10 +18,17 @@ export const metadata: Metadata = {
   description: "CS undergraduate specializing in cybersecurity operations and machine learning. Building secure systems and intelligent solutions.",
   keywords: ["cybersecurity", "machine learning", "software engineer", "portfolio", "Jainam Shah"],
   authors: [{ name: "Jainam Shah" }],
+  metadataBase: new URL("https://jainamshah.dev"),
   openGraph: {
     title: "Jainam Shah | Cybersecurity & ML",
-    description: "CS undergraduate specializing in cybersecurity operations and machine learning.",
+    description: "CS undergraduate specializing in cybersecurity operations and machine learning. Building secure and intelligent systems.",
     type: "website",
+    siteName: "Jainam Shah Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jainam Shah | Cybersecurity & ML",
+    description: "CS undergraduate specializing in cybersecurity operations and machine learning.",
   },
 };
 

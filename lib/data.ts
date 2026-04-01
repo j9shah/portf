@@ -1,7 +1,6 @@
 export const personalInfo = {
   name: "Jainam Shah",
   title: "CS Undergraduate",
-  bio: "CS student at TMU. Into cybersecurity and machine learning.",
 };
 
 export type Experience = {
@@ -151,7 +150,7 @@ export const projects: Project[] = [
       "Interactive GUI for filtering",
       "Dataset of 8000+ product reviews",
     ],
-    tech: ["Python", "Tkinter", "NetworkX"],
+    tech: ["Python", "Tkinter"],
     github: "https://github.com/j9shah/Skincare-Recommender",
     demo: null,
     devpost: null,

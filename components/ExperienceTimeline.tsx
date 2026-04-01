@@ -30,7 +30,7 @@ export function ExperienceTimeline() {
   return (
     <section id="experience" className="section">
       <div className="layout-container">
-        <motion.h2 
+        <motion.h2
           className="text-2xl md:text-3xl font-semibold text-text-primary mb-16 tracking-tight text-center"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,29 +49,26 @@ export function ExperienceTimeline() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {/* Vertical center line - visible on desktop */}
-          <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-border-color/60" />
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border-color/60 -translate-x-1/2 pointer-events-none" />
 
           {/* Featured/Technical Experience - Alternating Layout */}
           <div className="space-y-12 md:space-y-16 mb-16">
             {featuredExperiences.map((exp, index) => {
               const isLeft = index % 2 === 0;
               const isLast = index === featuredExperiences.length - 1;
-              
+
               return (
                 <motion.div
                   key={exp.id}
                   variants={cardVariants}
                   className="relative"
                 >
-                  {/* Desktop: Alternating left/right */}
-                  <div className={`
-                    hidden md:grid md:grid-cols-2 gap-8 items-center
-                  `}>
-                    {/* Left side */}
+                  {/* Desktop: Alternating left/right positions, but always left-aligned text */}
+                  <div className="hidden md:grid md:grid-cols-2 gap-8 items-start">
                     {isLeft ? (
                       <>
-                        <div className="text-right pr-8">
-                          <TimelineCard exp={exp} align="right" featured />
+                        <div className="pr-8">
+                          <TimelineCard exp={exp} align="left" featured />
                         </div>
                         <div className="pl-8" />
                       </>
@@ -93,35 +90,14 @@ export function ExperienceTimeline() {
                   </div>
 
                   {/* Timeline node */}
-                  <div className={`
-                    absolute top-6 
-                    ${isLeft ? 'md:left-1/2' : 'md:left-1/2'} 
+                  <div className="
+                    absolute top-6
                     left-0 md:left-1/2
-                    -translate-x-1/2
-                    w-3 h-3 rounded-full 
+                    md:-translate-x-1/2
+                    w-3 h-3 rounded-full
                     bg-accent border-2 border-bg-primary
                     z-10
-                  `} />
-
-                  {/* Connecting line to next node - only if not last */}
-                  {!isLast && (
-                    <>
-                      {/* Desktop connecting line */}
-                      <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-px bg-accent/30 z-0" 
-                        style={{ 
-                          top: '1.5rem', // Start from node center (h-3 = 0.75rem, so center is 0.75rem)
-                          height: 'calc(100% + 4rem)' // Extend to next node
-                        }} 
-                      />
-                      {/* Mobile connecting line */}
-                      <div className="md:hidden absolute left-0 w-px bg-accent/30 z-0" 
-                        style={{ 
-                          top: '1.5rem',
-                          height: 'calc(100% + 3rem)'
-                        }} 
-                      />
-                    </>
-                  )}
+                  " />
                 </motion.div>
               );
             })}
@@ -155,9 +131,9 @@ export function ExperienceTimeline() {
 }
 
 // Featured timeline card component
-function TimelineCard({ exp, align, featured }: { 
-  exp: any; 
-  align: 'left' | 'right'; 
+function TimelineCard({ exp, align, featured }: {
+  exp: any;
+  align: 'left' | 'right';
   featured?: boolean;
 }) {
   return (
@@ -221,8 +197,8 @@ function TimelineCard({ exp, align, featured }: {
 function CompactCard({ exp }: { exp: any }) {
   return (
     <motion.div
-      className="card p-4 h-full"
-      whileHover={{ y: -2, borderColor: 'var(--accent)' }}
+      className="bg-surface-elevated rounded-xl p-4 h-full transition-all duration-200"
+      whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >
       <h4 className="text-sm font-semibold text-text-primary leading-tight mb-1">

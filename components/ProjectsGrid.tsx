@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { projects } from '@/lib/data';
-import { Code, ExternalLink } from 'lucide-react';
+import { Code2, ExternalLink, Zap } from 'lucide-react';
 
 export function ProjectsGrid() {
   const cardVariants = {
@@ -25,9 +25,9 @@ export function ProjectsGrid() {
   };
 
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section mb-16">
       <div className="layout-container">
-        <motion.h2 
+        <motion.h2
           className="text-2xl md:text-3xl font-semibold text-text-primary mb-16 tracking-tight text-center"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,15 +63,20 @@ function ProjectCard({ project }: { project: any }) {
   return (
     <motion.div
       className="card p-5 h-full flex flex-col group"
-      whileHover={{ y: -3, borderColor: 'var(--accent)' }}
+      whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      {/* Header */}
-      <div className="mb-3">
-        <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors duration-200 mb-2">
-          {project.name}
-        </h3>
-        
+      {/* Header with icon */}
+      <div className="mb-4">
+        <div className="flex items-start gap-3 mb-3">
+          <div className="w-8 h-8 rounded-lg bg-accent-subtle flex items-center justify-center shrink-0">
+            <Code2 size={16} className="text-accent" />
+          </div>
+          <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent transition-colors duration-200 flex-1">
+            {project.name}
+          </h3>
+        </div>
+
         {/* Description - single strong sentence */}
         <p className="text-sm text-text-secondary leading-relaxed">
           {project.description}
@@ -80,10 +85,10 @@ function ProjectCard({ project }: { project: any }) {
 
       {/* Features - 2-3 bullet highlights */}
       {project.features && project.features.length > 0 && (
-        <ul className="mb-4 space-y-1.5 flex-grow">
+        <ul className="mb-4 space-y-2 flex-grow">
           {project.features.slice(0, 3).map((feature, i) => (
             <li key={i} className="flex items-start gap-2 text-xs text-text-muted">
-              <span className="w-1 h-1 rounded-full bg-accent/60 mt-1.5 shrink-0" />
+              <Zap size={12} className="w-3 h-3 text-accent/60 shrink-0 mt-1" />
               <span className="leading-relaxed">{feature}</span>
             </li>
           ))}
@@ -91,11 +96,11 @@ function ProjectCard({ project }: { project: any }) {
       )}
 
       {/* Tech stack - concise, max 5-6 tags */}
-      <div className="flex flex-wrap gap-1.5 mb-4">
+      <div className="flex flex-wrap gap-1.5 mb-4 pb-4 border-b border-border-color/40">
         {project.tech.slice(0, 6).map((tech) => (
           <span
             key={tech}
-            className="px-2 py-0.5 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"
+            className="px-2.5 py-1 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"
           >
             {tech}
           </span>
@@ -103,15 +108,16 @@ function ProjectCard({ project }: { project: any }) {
       </div>
 
       {/* Action buttons - clean, minimal */}
-      <div className="flex items-center gap-4 pt-4 mt-auto border-t border-border-color/50">
+      <div className="flex items-center gap-3 mt-auto">
         {project.github && (
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-sm font-medium"
+            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-xs font-medium tracking-wide group/link"
+            title="View source code"
           >
-            <Code className="w-4 h-4" />
+            <Code2 className="w-4 h-4" />
             <span>Code</span>
           </a>
         )}
@@ -120,10 +126,11 @@ function ProjectCard({ project }: { project: any }) {
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-sm font-medium"
+            className="flex items-center gap-1.5 text-text-muted hover:text-accent transition-colors duration-200 text-xs font-medium tracking-wide group/link ml-auto"
+            title="View live demo"
           >
-            <ExternalLink className="w-4 h-4" />
             <span>Demo</span>
+            <ExternalLink className="w-4 h-4" />
           </a>
         )}
       </div>

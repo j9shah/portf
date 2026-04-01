@@ -12,62 +12,93 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
+// Otter SVG component
+function OtterIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 100 100" className={className} aria-label="Otter mascot">
+      <defs>
+        <linearGradient id="otterGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: '#8B7355' }} />
+          <stop offset="100%" style={{ stopColor: '#6B5344' }} />
+        </linearGradient>
+      </defs>
+      <ellipse cx="50" cy="52" rx="35" ry="32" fill="url(#otterGradNav)" />
+      <circle cx="22" cy="30" r="10" fill="#6B5344" />
+      <circle cx="78" cy="30" r="10" fill="#6B5344" />
+      <circle cx="22" cy="30" r="6" fill="#D4C4B0" />
+      <circle cx="78" cy="30" r="6" fill="#D4C4B0" />
+      <ellipse cx="50" cy="58" rx="22" ry="18" fill="#D4C4B0" />
+      <ellipse cx="38" cy="48" rx="6" ry="7" fill="#1a1a1a" />
+      <ellipse cx="62" cy="48" rx="6" ry="7" fill="#1a1a1a" />
+      <circle cx="40" cy="46" r="2" fill="#fff" />
+      <circle cx="64" cy="46" r="2" fill="#fff" />
+      <ellipse cx="50" cy="60" rx="8" ry="5" fill="#1a1a1a" />
+      <ellipse cx="50" cy="59" rx="3" ry="2" fill="#4a4a4a" />
+      <path d="M 44 68 Q 50 73 56 68" stroke="#6B5344" strokeWidth="2" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const updateActiveSection = useCallback(() => {
-    const scrollY = window.scrollY;
-    const viewportHeight = window.innerHeight;
-    
-    setIsScrolled(scrollY > 50);
+  // Use IntersectionObserver for more reliable scroll tracking
+  useEffect(() => {
+    // Scroll listener for navbar background
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    // Get the hero section to determine when we've scrolled past it
-    const heroSection = document.querySelector('section');
-    if (heroSection) {
-      const heroRect = heroSection.getBoundingClientRect();
-      // If the hero section bottom is still significantly visible, no nav item is active
-      if (heroRect.bottom > viewportHeight * 0.5) {
-        setActiveSection(null);
-        return;
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Track which sections are currently visible
+    const visibleSections = new Map<string, number>();
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target.id, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(entry.target.id);
+        }
+      });
+
+      // Find the section with highest visibility
+      let maxRatio = 0;
+      let activeId = '';
+      visibleSections.forEach((ratio, id) => {
+        if (ratio > maxRatio) {
+          maxRatio = ratio;
+          activeId = id;
+        }
+      });
+
+      if (activeId) {
+        setActiveSection(`#${activeId}`);
       }
-    }
+    };
 
-    // Check each section - find which one is most in view
+    // Create observer
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      rootMargin: '-20% 0px -20% 0px',
+    });
+
     const sections = ['experience', 'projects', 'contact'];
-    let bestMatch: string | null = null;
-    let bestScore = -Infinity;
-
-    for (const sectionId of sections) {
+    sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) {
-        const rect = element.getBoundingClientRect();
-        // Calculate how much of the section is in the "active zone" (top 60% of viewport)
-        const activeZoneBottom = viewportHeight * 0.6;
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(activeZoneBottom, rect.bottom);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        
-        // Score based on visible height and proximity to top
-        const score = visibleHeight - (rect.top > 0 ? rect.top * 0.5 : 0);
-        
-        if (score > bestScore && rect.top < activeZoneBottom && rect.bottom > 0) {
-          bestScore = score;
-          bestMatch = `#${sectionId}`;
-        }
+        observer.observe(element);
       }
-    }
+    });
 
-    setActiveSection(bestMatch);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-    updateActiveSection();
-
-    return () => window.removeEventListener('scroll', updateActiveSection);
-  }, [updateActiveSection]);
 
   const scrollToSection = (href: string) => {
     if (href.startsWith('#')) {
@@ -93,20 +124,21 @@ export function Navbar() {
               flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl
               border border-[var(--border-color)]
               transition-all duration-300
-              ${isScrolled 
-                ? 'bg-[var(--bg-elevated)]/95 backdrop-blur-md shadow-sm' 
+              ${isScrolled
+                ? 'bg-[var(--bg-elevated)]/95 backdrop-blur-md shadow-sm'
                 : 'bg-[var(--bg-elevated)]/70 backdrop-blur-sm'
               }
             `}
           >
-            {/* Logo */}
+            {/* Otter Logo */}
             <Link href="/" className="group">
               <motion.div
-                className="px-2.5 sm:px-3 py-1.5 sm:py-2 font-semibold text-sm sm:text-base text-accent tracking-wide"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="px-1.5 sm:px-2 py-1 sm:py-1.5 flex items-center gap-1.5"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                JS
+                <OtterIcon className="w-7 h-7 sm:w-8 sm:h-8" />
+                <span className="font-semibold text-sm sm:text-base text-accent tracking-wide">JS</span>
               </motion.div>
             </Link>
 
@@ -126,8 +158,8 @@ export function Navbar() {
                     <span
                       className={`
                         text-sm font-medium transition-colors duration-200
-                        ${isActive 
-                          ? 'text-accent' 
+                        ${isActive
+                          ? 'text-accent'
                           : 'text-text-secondary hover:text-text-primary'
                         }
                       `}

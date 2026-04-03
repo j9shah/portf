@@ -94,7 +94,7 @@ export function InteractiveTether() {
         
         // Update orb position if not currently dragging
         if (!isDragging) {
-          orbY.set(newRestOffsetY, false); // false = instant, no animation
+          orbY.jump(newRestOffsetY); // jump = instant, no animation
         }
       }
     };
@@ -106,7 +106,7 @@ export function InteractiveTether() {
       mediaQuery.removeEventListener('change', handleChange);
       window.removeEventListener('resize', updatePosition);
     };
-  }, []);
+  }, [isDragging, orbY]);
 
   // Disco ball rotation when static (not dragging)
   useEffect(() => {

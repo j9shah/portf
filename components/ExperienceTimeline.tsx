@@ -152,10 +152,34 @@ function TimelineCard({ exp, align, featured }: {
         ${align === 'left' ? 'left-0' : 'right-0'}
       `} />
 
-      {/* Role title */}
-      <h3 className="text-lg font-semibold text-text-primary mb-1 leading-tight">
-        {exp.position}
-      </h3>
+      {/* Role title and link button in same row */}
+      <div className="flex items-start justify-between gap-3 mb-1">
+        <h3 className="text-lg font-semibold text-text-primary leading-tight">
+          {exp.position}
+        </h3>
+        
+        {exp.link && (
+          <motion.a 
+            href={exp.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-accent/10 hover:bg-accent/20 border border-accent/30 hover:border-accent/50 text-accent text-xs font-medium transition-all duration-200 group/link"
+            whileHover={{ scale: 1.02, x: 2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 20 20" 
+              fill="currentColor" 
+              className="w-3 h-3"
+            >
+              <path fillRule="evenodd" d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z" clipRule="evenodd" />
+              <path fillRule="evenodd" d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z" clipRule="evenodd" />
+            </svg>
+            Visit Lab
+          </motion.a>
+        )}
+      </div>
 
       {/* Company */}
       <div className="text-sm text-accent font-medium mb-3">

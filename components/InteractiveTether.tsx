@@ -25,10 +25,10 @@ export function InteractiveTether() {
   // Track current orb position for rendering
   const [currentOrbX, setCurrentOrbX] = useState(0);
   const [currentOrbY, setCurrentOrbY] = useState(250);
+  const [restOffsetY, setRestOffsetY] = useState(250);
 
   // Rest position offset from anchor (dangling below the otter)
   const restOffsetX = 0;
-  const restOffsetY = 250; // Adjusted to prevent hiding behind name
 
   // Update path whenever orb moves - creates a dangling wire effect
   useEffect(() => {
@@ -73,6 +73,29 @@ export function InteractiveTether() {
           x: containerRect.width / 2,
           y: 0
         });
+        
+        // Adjust rest position based on screen height - shorter on smaller screens
+        const screenHeight = window.innerHeight;
+        let newRestOffsetY;
+        
+        if (screenHeight < 600) {
+          newRestOffsetY = 120; // Very short screens (mobile landscape)
+        } else if (screenHeight < 700) {
+          newRestOffsetY = 150; // Small mobile screens
+        } else if (screenHeight < 800) {
+          newRestOffsetY = 180; // Medium mobile screens
+        } else if (screenHeight < 900) {
+          newRestOffsetY = 220; // Tablets/small laptops
+        } else {
+          newRestOffsetY = 250; // Desktop monitors
+        }
+        
+        setRestOffsetY(newRestOffsetY);
+        
+        // Update orb position if not currently dragging
+        if (!isDragging) {
+          orbY.set(newRestOffsetY, false); // false = instant, no animation
+        }
       }
     };
 
@@ -148,7 +171,7 @@ export function InteractiveTether() {
     // Spring back to rest position
     orbX.set(restOffsetX);
     orbY.set(restOffsetY);
-  }, [orbX, orbY]);
+  }, [orbX, orbY, restOffsetY]);
 
   if (isMobile) return null;
 

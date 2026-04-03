@@ -15,6 +15,7 @@ export type Experience = {
   description?: string;
   technologies?: string[];
   featured?: boolean;
+  link?: string;
 };
 
 export const experiences: Experience[] = [
@@ -40,6 +41,7 @@ export const experiences: Experience[] = [
     description: "Applied ML and NLP techniques to analyze phishing campaigns. Developed data collection pipelines for security research.",
     technologies: ["Python", "SpaCy", "NLTK", "TensorFlow", "Selenium"],
     featured: true,
+    link: "https://www.torontomu.ca/tedrogersschool/cybersecurity-research-lab/",
   },
   {
     id: "tutorbright",

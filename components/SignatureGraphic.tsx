@@ -54,7 +54,7 @@ export function SignatureGraphic() {
         </defs>
 
         {/* Centered network structure - dark mode */}
-        <g className="hidden dark:block" opacity="0.7">
+        <g className="hidden dark:block" opacity="0.99">
           {/* Horizontal flow lines */}
           <path
             d="M 100 390 Q 300 390 400 360 T 600 380 T 800 360 T 1000 390 L 1100 390"
@@ -140,7 +140,7 @@ export function SignatureGraphic() {
         </g>
         
         {/* Centered network structure - light mode */}
-        <g className="block dark:hidden" opacity="0.55">
+        <g className="block dark:hidden" opacity="0.99">
           {/* Horizontal flow lines */}
           <path
             d="M 100 390 Q 300 390 400 360 T 600 380 T 800 360 T 1000 390 L 1100 390"
@@ -288,7 +288,7 @@ export function SignatureGraphic() {
         </g>
 
         {/* Grid - dark mode */}
-        <g className="hidden dark:block" opacity="0.035">
+        <g className="hidden dark:block" opacity="0.055">
           {[...Array(10)].map((_, i) => (
             <line
               key={`h-${i}`}
@@ -314,7 +314,7 @@ export function SignatureGraphic() {
         </g>
         
         {/* Grid - light mode */}
-        <g className="block dark:hidden" opacity="0.025">
+        <g className="block dark:hidden" opacity="0.045">
           {[...Array(10)].map((_, i) => (
             <line
               key={`h-light-${i}`}

@@ -208,7 +208,7 @@ export function InteractiveTether() {
           <span className="text-accent dark:text-accent light:text-[#92400e] font-semibold text-base md:text-lg lg:text-xl">✨ Easter egg unlocked!</span>
           <br />
           <span className="text-text-secondary dark:text-text-secondary light:text-[#44403c]">
-            {hasInteracted ? "Noice!! Try stretching it further" : "Drag the orb and watch it snap back"}
+            {hasInteracted ? "Noice!! Try stretching it further" : ""}
           </span>
         </div>
       </motion.div>

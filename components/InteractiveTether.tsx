@@ -31,6 +31,7 @@ export function InteractiveTether() {
   const [isMobile, setIsMobile] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showHint, setShowHint] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Track dark/light mode for particle colors
 
   // Orb position with spring physics (used for drag, but pendulum for release)
   const springConfig = { stiffness: 40, damping: 4, mass: 2 };
@@ -345,6 +346,16 @@ export function InteractiveTether() {
 
     mediaQuery.addEventListener('change', handleChange);
     setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    
+    // Check dark mode by looking at document class
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+    checkDarkMode();
+    
+    // Watch for dark mode changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     const updatePosition = () => {
       if (containerRef.current) {
@@ -386,6 +397,7 @@ export function InteractiveTether() {
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
       window.removeEventListener('resize', updatePosition);
+      observer.disconnect();
     };
   }, [isDragging, orbY]);
 
@@ -666,11 +678,6 @@ export function InteractiveTether() {
       >
         <div className="bg-bg-elevated/80 dark:bg-bg-elevated/80 light:bg-[#f8f6f3]/95 backdrop-blur-sm border border-accent/20 dark:border-accent/20 light:border-[#d6d3d1]/60 rounded-lg px-4 py-3 md:px-6 md:py-4 text-sm md:text-base lg:text-lg max-w-[90vw] md:max-w-[500px] lg:max-w-[600px] shadow-lg">
           <span className="text-accent dark:text-accent light:text-[#92400e] font-semibold text-base md:text-lg lg:text-xl">✨ Easter egg unlocked!</span>
-          <br />
-          <span className="text-text-secondary dark:text-text-secondary light:text-[#44403c]">
-            {/* Feedback message overrides default text when active */}
-            {feedbackMessage || (hasInteracted ? "Noice!! Try stretching it further" : "")}
-          </span>
         </div>
       </motion.div>
 
@@ -761,14 +768,16 @@ export function InteractiveTether() {
           />
 
           {/* Sparkle particles from peak energy effects */}
+          {/* In light mode, particles are dark (accent color) for contrast */}
+          {/* In dark mode, particles are white/bright */}
           {particles.map(p => (
             <circle
               key={p.id}
               cx={p.x}
               cy={p.y}
               r={p.size * p.life} // Shrink as life decreases
-              fill="white"
-              opacity={p.life * 0.8}
+              fill={isDarkMode ? 'white' : 'var(--accent)'}
+              opacity={p.life * (isDarkMode ? 0.8 : 0.9)}
               filter="url(#orbGlow)"
             />
           ))}

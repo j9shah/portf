@@ -137,7 +137,7 @@ export const projects: Project[] = [
     ],
     tech: ["TypeScript", "Next.js", "Supabase", "Tailwind CSS"],
     github: "https://github.com/j9shah/lumina",
-    demo: "https://lumina.vercel.app",
+    demo: "https://lumina-olive.vercel.app/",
     devpost: null,
   },
   {

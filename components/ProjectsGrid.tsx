@@ -117,40 +117,55 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Action buttons - styled as clickable buttons */}
         <div className="flex items-center gap-2 pt-4">
         {project.github && (
-          <a
+          <motion.a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 hover:bg-accent hover:text-white text-accent transition-all duration-150 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent relative overflow-hidden group/btn hover:shadow-lg hover:shadow-accent/30"
             title="View source code"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Code2 className="w-4 h-4" />
-            <span>Code</span>
-          </a>
+            {/* Shimmer effect on hover */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+            
+            <Code2 className="w-4 h-4 relative z-10" />
+            <span className="relative z-10">Code</span>
+          </motion.a>
         )}
         {project.devpost && (
-          <a
+          <motion.a
             href={project.devpost}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 hover:bg-accent hover:text-white text-accent transition-all duration-150 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent relative overflow-hidden group/btn hover:shadow-lg hover:shadow-accent/30"
             title="View on Devpost"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <Award className="w-4 h-4" />
-            <span>Devpost</span>
-          </a>
+            {/* Shimmer effect on hover */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+            
+            <Award className="w-4 h-4 relative z-10" />
+            <span className="relative z-10">Devpost</span>
+          </motion.a>
         )}
         {project.demo && (
-          <a
+          <motion.a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-all duration-200 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent/50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 hover:bg-accent hover:text-white text-accent transition-all duration-150 text-xs font-medium tracking-wide border border-accent/30 hover:border-accent relative overflow-hidden group/btn hover:shadow-lg hover:shadow-accent/30"
             title="View live demo"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span>Demo</span>
-            <ExternalLink className="w-4 h-4" />
-          </a>
+            {/* Shimmer effect on hover */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+            
+            <span className="relative z-10">Live</span>
+            <ExternalLink className="w-4 h-4 relative z-10" />
+          </motion.a>
         )}
         </div>
       </div>

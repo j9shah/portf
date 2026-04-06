@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    /* Light mode - warm cream/ivory with bronze accent */
-    --bg-primary: #f8f6f3;
+    /* Light mode - warm cream/ivory with refined amber accent */
+    --bg-primary: #faf8f5;
     --bg-secondary: #f0ece6;
     --bg-elevated: #ffffff;
-    --text-primary: #1c1917;
+    --text-primary: #1a1715;
     --text-secondary: #44403c;
     --text-muted: #78716c;
     --border-color: #d6d3d1;
-    --accent: #92400e;
-    --accent-hover: #78350f;
-    --accent-subtle: rgba(146, 64, 14, 0.08);
+    --accent: #9b6b2c;
+    --accent-hover: #92400e;
+    --accent-subtle: rgba(180, 83, 9, 0.08);
     
     /* Light mode specific */
     --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.08);

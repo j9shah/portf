@@ -15,13 +15,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Jainam Shah",
-  description: "CS undergraduate strudent at Toronto Metropolitan University.",
-  keywords: ["cybersecurity", "machine learning", "software engineer", "portfolio", "Jainam Shah"],
+  description: "CS undergraduate student at Toronto Metropolitan University.",
+  keywords: ["software engineer", "portfolio", "Jainam Shah"],
   authors: [{ name: "Jainam Shah" }],
   metadataBase: new URL("https://j9shah.vercel.app/"),
   openGraph: {
     title: "Jainam Shah",
-    description: "CS undergraduate strudent at Toronto Metropolitan University.",
+    description: "CS undergraduate student at Toronto Metropolitan University.",
     type: "website",
     siteName: "Jainam Shah's Portfolio",
   },

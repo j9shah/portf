@@ -74,42 +74,7 @@ export default async function Image() {
           Jainam Shah
         </div>
 
-        {/* Title */}
-        <div
-          style={{
-            fontSize: '28px',
-            color: '#D4C4B0',
-            marginBottom: '40px',
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-          }}
-        >
-          Cybersecurity & Machine Learning
-        </div>
 
-        {/* Tags */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '16px',
-          }}
-        >
-          {['Security Operations', 'ML/AI', 'Research'].map((tag) => (
-            <div
-              key={tag}
-              style={{
-                padding: '12px 24px',
-                background: 'rgba(212,196,176,0.1)',
-                border: '1px solid rgba(212,196,176,0.2)',
-                borderRadius: '8px',
-                color: '#a09080',
-                fontSize: '18px',
-              }}
-            >
-              {tag}
-            </div>
-          ))}
-        </div>
 
         {/* URL */}
         <div
@@ -120,7 +85,7 @@ export default async function Image() {
             color: '#666',
           }}
         >
-          jainamshah.dev
+          https://j9shah.vercel.app/
         </div>
       </div>
     ),

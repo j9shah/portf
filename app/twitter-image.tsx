@@ -85,7 +85,7 @@ export default async function Image() {
             color: '#666',
           }}
         >
-          https://j9shah.vercel.app/
+          j9shah.vercel.app
         </div>
       </div>
     ),

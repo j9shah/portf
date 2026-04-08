@@ -18,17 +18,27 @@ export const metadata: Metadata = {
   description: "Computer Science - Toronto Metropolitan University",
   keywords: ["software engineer", "portfolio", "Jainam Shah"],
   authors: [{ name: "Jainam Shah" }],
-  metadataBase: new URL("https://j9shah.vercel.app/"),
+  metadataBase: new URL("https://j9shah.vercel.app"),
   openGraph: {
     title: "Jainam Shah",
     description: "Computer Science - Toronto Metropolitan University",
     type: "website",
     siteName: "Jainam Shah's Portfolio",
+    url: "https://j9shah.vercel.app",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Jainam Shah - Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jainam Shah",
     description: "Computer Science - Toronto Metropolitan University",
+    images: ["/twitter-image"],
   },
 };
 

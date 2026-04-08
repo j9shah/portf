@@ -154,9 +154,16 @@ function TimelineCard({ exp, align, featured }: {
 
       {/* Role title and link button in same row */}
       <div className="flex items-start justify-between gap-3 mb-1">
-        <h3 className="text-lg font-semibold text-text-primary leading-tight">
-          {exp.position}
-        </h3>
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-text-primary leading-tight">
+            {exp.position}
+          </h3>
+          {exp.specialty && (
+            <p className="text-lg font-semibold text-text-primary leading-tight">
+              {exp.specialty}
+            </p>
+          )}
+        </div>
         
         {exp.link && (
           <motion.a 
@@ -208,7 +215,7 @@ function TimelineCard({ exp, align, featured }: {
           flex flex-wrap gap-1.5
           ${align === 'right' ? 'justify-end' : 'justify-start'}
         `}>
-          {exp.technologies.slice(0, 5).map((tech: string) => (
+          {exp.technologies.slice(0, 7).map((tech: string) => (
             <span
               key={tech}
               className="px-2 py-0.5 text-xs font-medium rounded-md bg-accent-subtle text-accent border border-accent/15"

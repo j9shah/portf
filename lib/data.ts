@@ -7,6 +7,7 @@ export type Experience = {
   id: string;
   company: string;
   position: string;
+  specialty?: string;
   type?: string;
   period: string;
   duration?: string;
@@ -26,20 +27,20 @@ export const experiences: Experience[] = [
     type: "Internship",
     period: "Sept 2025 – Present",
     location: "Toronto, Ontario, Canada",
-    description: "Investigating and triaging cybersecurity incidents across critical infrastructure. Building automated threat detection workflows.",
-    technologies: ["Python", "KQL", "Microsoft Sentinel", "Threat Intel"],
+    description: "Supported enterprise security operations by investigating phishing incidents, analyzing threat indicators, and automating triage workflows using Python and Microsoft security tools.",
+    technologies: ["Microsoft Defender", "Microsoft Sentinel (KQL)", "Python"],
     featured: true,
   },
   {
     id: "crl",
     company: "TMU Cybersecurity Research Lab",
     position: "Research Assistant",
+    specialty: "(Applied Machine Learning)",
     type: "Research",
     period: "May 2024 – Aug 2025",
-    duration: "1 yr 4 mos",
     location: "Toronto, Ontario, Canada",
-    description: "Applied ML and NLP techniques to analyze phishing campaigns. Developed data collection pipelines for security research.",
-    technologies: ["Python", "SpaCy", "NLTK", "TensorFlow", "Selenium"],
+    description: "Supported senior researchers by developing data pipelines and NLP models, improving data reliability and contributing to applied machine learning workflows across multiple datasets.",
+    technologies: ["Python", "JavaScript (Google Apps Script)", "SpaCy", "NLTK", "Selenium", "NumPy", "Pandas"],
     featured: true,
     link: "https://www.torontomu.ca/tedrogersschool/cybersecurity-research-lab/",
   },
@@ -115,19 +116,6 @@ export const projects: Project[] = [
     devpost: "https://devpost.com/software/algowhere",
   },
   {
-    id: "citco",
-    name: "Citco",
-    description: "Web application investigating correlation between individual researchers' citation counts and NSERC Discovery Grant funding amounts.",
-    features: [
-      "Web-scraped dataset from NSERC grant database and Google Scholar citations",
-      "Statistical analysis revealing Pearson correlation coefficient of ~0.3",
-    ],
-    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Flask"],
-    github: "https://github.com/j9shah/citco",
-    demo: null,
-    devpost: null,
-  },
-  {
     id: "lumina",
     name: "Lumina",
     description: "Real-time collaborative drawing app with live cursor tracking and presence awareness across ephemeral sessions.",
@@ -150,6 +138,19 @@ export const projects: Project[] = [
     ],
     tech: ["Python", "Pandas", "Tkinter"],
     github: "https://github.com/j9shah/Skincare-Recommender",
+    demo: null,
+    devpost: null,
+  },
+  {
+    id: "citco",
+    name: "Citco",
+    description: "Web application investigating correlation between individual researchers' citation counts and NSERC Discovery Grant funding amounts.",
+    features: [
+      "Web-scraped dataset from NSERC grant database and Google Scholar citations",
+      "Statistical analysis revealing Pearson correlation coefficient of ~0.3",
+    ],
+    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Flask"],
+    github: "https://github.com/j9shah/citco",
     demo: null,
     devpost: null,
   },

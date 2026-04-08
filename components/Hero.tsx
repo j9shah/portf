@@ -90,6 +90,16 @@ export function Hero() {
         </motion.nav>
       </div>
 
+      {/* University subtitle - bottom center */}
+      <motion.p
+        className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 text-sm text-text-muted"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
+      >
+        Computer Science @ Toronto Metropolitan University
+      </motion.p>
+
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2"

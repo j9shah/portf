@@ -5,6 +5,9 @@ export const alt = 'Jainam Shah - Portfolio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
+// Owl icon as base64 PNG (80x80)
+const owlBase64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+CiAgPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiBmaWxsPSIjMWExYTFhIiByeD0iMTIiLz4KICA8Zz4KICAgIDxwYXRoIGZpbGw9IiM5QjlCOUEiIGQ9Ik0zMCwyOWwtMywyYy05LjUsNC4zNzUtMiwzMC0yLDMwczguNzUtOS4yNSwxNS44NzUtMTAuMTI1UzUxLjc1LDM2Ljc1LDUwLDMybC0yLTQiLz4KICAgIDxwYXRoIGZpbGw9IiM5QjlCOUEiIGQ9Ik0zMCwzMGMwLDAtNi41LTUuNS0wLjI1LTE0Ljc1YzAsMC0wLjc1LTMuMjUtMi43NS0zLjI1czUtMyw2LDFjMCwwLDctMywxMSwwYzAsMCw1LjI1LTMuNSw3LjEyNS0xLjc1QzUxLjEyNSwxMS4yNSw0NywxNCw0OSwxNnM0LDEwLTEsMTQiLz4KICAgIDxwYXRoIGZpbGw9IiNBNTc5MzkiIGQ9Ik00MCwzMGMwLDAtMTAsMC0xMC03Ljg3NWMwLTguNzM0MSw4LjE5MDctNC43MzU5LDktMy4xMjVjMCwwLDctNiw5LjEyNSwxLjVDNTAuMTgzNCwyNy43NjQ5LDQwLDMwLDQwLDMweiIvPgogICAgPHBhdGggZmlsbD0iI0E1NzkzOSIgZD0iTTI1LjAxOTIsNTljMCwwLTAuODc4Mi03LDEuOTAyNy05UzQwLDQwLDM3LDM1Ii8+CiAgPC9nPgo8L3N2Zz4=';
+
 export default async function Image() {
   return new ImageResponse(
     (
@@ -21,61 +24,29 @@ export default async function Image() {
           position: 'relative',
         }}
       >
-        {/* Simple decorative element instead of complex SVG */}
-        <div
+        {/* Owl icon in top left */}
+        <img
+          src={owlBase64}
+          width="80"
+          height="80"
           style={{
             position: 'absolute',
             top: '40px',
             left: '40px',
-            width: '60px',
-            height: '60px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #d4c4b0 0%, #a89070 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '28px',
+            borderRadius: '12px',
           }}
-        >
-          🦉
-        </div>
+        />
 
-        {/* Name */}
+        {/* Name only - clean and professional */}
         <div
           style={{
             fontSize: '96px',
             fontWeight: 700,
             color: '#f5f0e8',
-            marginBottom: '24px',
             letterSpacing: '-3px',
           }}
         >
           Jainam Shah
-        </div>
-
-        {/* Subtitle */}
-        <div
-          style={{
-            fontSize: '32px',
-            color: '#d4c4b0',
-            marginBottom: '32px',
-          }}
-        >
-          Software Engineer
-        </div>
-
-        {/* Navigation links */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '40px',
-            fontSize: '24px',
-            color: '#888',
-          }}
-        >
-          <span>Experience</span>
-          <span>Projects</span>
-          <span>Contact</span>
         </div>
       </div>
     ),

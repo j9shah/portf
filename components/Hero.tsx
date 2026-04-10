@@ -48,6 +48,8 @@ export function Hero() {
           }
         `}
         onClick={() => setShowTether(!showTether)}
+        aria-pressed={showTether}
+        aria-label={showTether ? "Hide interactive element" : "Show interactive element"}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1, duration: 0.4 }}

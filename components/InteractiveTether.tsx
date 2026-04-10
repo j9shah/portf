@@ -88,6 +88,8 @@ export function InteractiveTether() {
   const particleIdRef = useRef<number>(0);
   // Feedback timeout ref for cleanup
   const feedbackTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Delayed particle timeouts for cleanup if the Easter egg is hidden mid-trail
+  const trailTimeoutsRef = useRef<Array<ReturnType<typeof setTimeout>>>([]);
   // Track if this is a "proper pull" for star trail effect
   const isProperPullRef = useRef<boolean>(false);
   // Frame counter for trail spawning (don't spawn every frame)
@@ -122,7 +124,12 @@ export function InteractiveTether() {
         size: 2 + Math.random() * 2,
       });
     }
-    setParticles(prev => [...prev, ...newParticles]);
+    setParticles(prev => [...prev, ...newParticles].slice(-120));
+  }, []);
+
+  const clearTrailTimeouts = useCallback(() => {
+    trailTimeoutsRef.current.forEach(clearTimeout);
+    trailTimeoutsRef.current = [];
   }, []);
 
   // Convert polar coordinates (angle, length) to Cartesian and update orb position
@@ -310,8 +317,9 @@ export function InteractiveTether() {
       if (feedbackTimeoutRef.current) {
         clearTimeout(feedbackTimeoutRef.current);
       }
+      clearTrailTimeouts();
     };
-  }, [stopAnimation]);
+  }, [stopAnimation, clearTrailTimeouts]);
 
   // Update path whenever orb moves - now with curved tether support
   useEffect(() => {
@@ -448,7 +456,7 @@ export function InteractiveTether() {
     setIsDragging(true);
     setHasInteracted(true);
     setShowHint(false);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    e.currentTarget.setPointerCapture(e.pointerId);
   }, [isMobile, stopAnimation]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -488,7 +496,11 @@ export function InteractiveTether() {
     );
   }, [isDragging, orbX, orbY, anchorPos, restOffsetY]);
 
-  const handlePointerUp = useCallback(() => {
+  const handlePointerUp = useCallback((e?: React.PointerEvent) => {
+    if (e?.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+
     setIsDragging(false);
     setIsHovering(false);
     
@@ -573,14 +585,16 @@ export function InteractiveTether() {
       // Create a sparkle trail along the path back toward rest
       // Spawn particles at intervals along the rope
       const trailSteps = Math.min(5, Math.floor(stretchRatio * 2));
+      clearTrailTimeouts();
       for (let i = 1; i <= trailSteps; i++) {
         const t = i / (trailSteps + 1); // 0 to 1
         const trailX = currentX * (1 - t * 0.3); // Particles along first 30% of path
         const trailY = currentY * (1 - t * 0.3);
         // Delayed spawn for trail effect
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           spawnParticles(trailX, trailY, 2);
         }, i * 50); // 50ms intervals
+        trailTimeoutsRef.current.push(timeoutId);
       }
     }
     
@@ -618,7 +632,7 @@ export function InteractiveTether() {
     
     // Start the pendulum physics animation
     startPendulumAnimation();
-  }, [orbX, orbY, restOffsetX, restOffsetY, prefersReducedMotion, startPendulumAnimation, spawnParticles]);
+  }, [orbX, orbY, restOffsetX, restOffsetY, prefersReducedMotion, startPendulumAnimation, spawnParticles, clearTrailTimeouts]);
 
   if (isMobile) return null;
 

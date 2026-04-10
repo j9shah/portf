@@ -2,31 +2,43 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+const INTERACTIVE_SELECTOR =
+  'a, button, [role="button"], input, textarea, select, [data-cursor-hover]';
+
 export function CursorGlow() {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const rafRef = useRef<number>();
+  const cursorRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const positionRef = useRef({ x: -100, y: -100 });
+  const rafRef = useRef<number | null>(null);
+  const isVisibleRef = useRef(false);
+
+  const moveCursor = useCallback(() => {
+    rafRef.current = null;
+
+    const { x, y } = positionRef.current;
+    const transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+
+    cursorRefs.current.forEach((element) => {
+      if (element) {
+        element.style.transform = transform;
+      }
+    });
+  }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    // Use requestAnimationFrame for smoother cursor updates
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
+    positionRef.current = { x: e.clientX, y: e.clientY };
+
+    if (!isVisibleRef.current) {
+      isVisibleRef.current = true;
+      setIsVisible(true);
     }
-    rafRef.current = requestAnimationFrame(() => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
-    });
-  }, [isVisible]);
 
-  const handleMouseEnter = useCallback(() => {
-    setIsHovering(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-  }, []);
+    if (rafRef.current === null) {
+      rafRef.current = requestAnimationFrame(moveCursor);
+    }
+  }, [moveCursor]);
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -44,39 +56,45 @@ export function CursorGlow() {
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Use MutationObserver to handle dynamically added elements
-    const addListeners = () => {
-      const interactiveElements = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, select, [data-cursor-hover]'
-      );
-      interactiveElements.forEach((el) => {
-        el.addEventListener('mouseenter', handleMouseEnter);
-        el.addEventListener('mouseleave', handleMouseLeave);
-      });
-      return interactiveElements;
+    const getInteractiveElement = (target: EventTarget | null) => {
+      return target instanceof Element ? target.closest(INTERACTIVE_SELECTOR) : null;
     };
 
-    const elements = addListeners();
-
-    const handleMouseOut = (e: MouseEvent) => {
-      if (!e.relatedTarget) {
-        setIsVisible(false);
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = getInteractiveElement(e.target);
+      if (target && !target.contains(e.relatedTarget as Node | null)) {
+        setIsHovering(true);
       }
     };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = getInteractiveElement(e.target);
+      const relatedTarget = e.relatedTarget as Node | null;
+
+      if (!relatedTarget) {
+        isVisibleRef.current = false;
+        setIsVisible(false);
+      }
+
+      if (target && !target.contains(relatedTarget)) {
+        setIsHovering(false);
+      }
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
-      if (rafRef.current) {
+
+      if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
       }
-      elements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-      });
     };
-  }, [isDesktop, handleMouseMove, handleMouseEnter, handleMouseLeave]);
+  }, [isDesktop, handleMouseMove]);
 
   if (!isDesktop) return null;
 
@@ -84,13 +102,17 @@ export function CursorGlow() {
     <>
       {/* Outer ring - refined */}
       <div
+        ref={(element) => {
+          cursorRefs.current[0] = element;
+        }}
         className="fixed pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -50%)',
+          left: 0,
+          top: 0,
+          transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)',
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 0.25s ease',
+          willChange: 'transform, opacity',
         }}
       >
         <div
@@ -106,13 +128,17 @@ export function CursorGlow() {
 
       {/* Inner dot */}
       <div
+        ref={(element) => {
+          cursorRefs.current[1] = element;
+        }}
         className="fixed pointer-events-none z-[9999]"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -50%)',
+          left: 0,
+          top: 0,
+          transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)',
           opacity: isVisible ? 1 : 0,
           transition: 'opacity 0.25s ease',
+          willChange: 'transform, opacity',
         }}
       >
         <div
@@ -128,17 +154,20 @@ export function CursorGlow() {
 
       {/* Subtle glow - more refined */}
       <div
+        ref={(element) => {
+          cursorRefs.current[2] = element;
+        }}
         className="fixed pointer-events-none z-10"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -50%)',
+          left: 0,
+          top: 0,
+          transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)',
           width: '150px',
           height: '150px',
           background: 'radial-gradient(circle, var(--accent-subtle) 0%, transparent 65%)',
           opacity: isVisible ? 0.5 : 0,
           transition: 'opacity 0.4s ease',
-          filter: 'blur(30px)',
+          willChange: 'transform, opacity',
         }}
       />
 

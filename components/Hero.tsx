@@ -25,7 +25,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center">
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center">
       <SignatureGraphic />
       
       {/* Floating bubbles/stars effect - only when easter egg is active */}

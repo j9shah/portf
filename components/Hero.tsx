@@ -61,7 +61,7 @@ export function Hero() {
       </motion.button>
 
       {/* Centered content container */}
-      <div className="layout-container flex flex-col items-center text-center relative z-10">
+      <div className="layout-container relative z-10 flex translate-y-6 flex-col items-center text-center sm:translate-y-7">
         {/* Name */}
         <motion.h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-text-primary dark:text-text-primary light:text-gray-800 tracking-tight"
@@ -94,7 +94,7 @@ export function Hero() {
 
       {/* University subtitle - bottom center */}
       <motion.p
-        className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 text-sm text-text-muted"
+        className="absolute bottom-20 sm:bottom-24 left-1/2 w-full max-w-xs -translate-x-1/2 px-6 text-center text-sm text-text-muted sm:max-w-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.6 }}

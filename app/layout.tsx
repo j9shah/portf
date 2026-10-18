@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 const portfolioTitle = 'Jainam’s Portfolio';
-const portfolioDescription = 'Explore my projects, experience, and what I’m building next.';
+const portfolioDescription = 'See what I’ve been building.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(personalInfo.url),
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: portfolioTitle,
     description: portfolioDescription,
     type: 'website',
-    siteName: new URL(personalInfo.url).hostname,
+    siteName: personalInfo.url,
     url: personalInfo.url,
     locale: 'en_CA',
   },

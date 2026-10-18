@@ -12,24 +12,27 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+const portfolioTitle = 'Jainam’s Portfolio';
+const portfolioDescription = 'Explore my projects, experience, and what I’m building next.';
+
 export const metadata: Metadata = {
   metadataBase: new URL(personalInfo.url),
-  title: `${personalInfo.name} — Portfolio`,
-  description: personalInfo.introduction,
+  title: portfolioTitle,
+  description: portfolioDescription,
   authors: [{ name: personalInfo.name }],
   alternates: { canonical: '/' },
   openGraph: {
-    title: personalInfo.name,
-    description: personalInfo.introduction,
+    title: portfolioTitle,
+    description: portfolioDescription,
     type: 'website',
-    siteName: `${personalInfo.name} — Portfolio`,
+    siteName: new URL(personalInfo.url).hostname,
     url: personalInfo.url,
     locale: 'en_CA',
   },
   twitter: {
     card: 'summary_large_image',
-    title: personalInfo.name,
-    description: personalInfo.introduction,
+    title: portfolioTitle,
+    description: portfolioDescription,
   },
 };
 

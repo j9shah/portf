@@ -1,9 +1,10 @@
 import { projects, type Project } from '@/lib/data';
 
 function ProjectEntry({ project, archived = false }: { project: Project; archived?: boolean }) {
+  const Heading = archived ? 'h4' : 'h3';
   return (
     <article className={archived ? 'project archive-project' : 'project'} aria-labelledby={`project-${project.id}`}>
-      <h3 id={`project-${project.id}`}>{project.name}</h3>
+      <Heading id={`project-${project.id}`}>{project.name}</Heading>
       <p className="project-description">{project.description}</p>
       <ul className="project-highlights">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
       <p className="technology-list">{project.tech.join(' · ')}</p>

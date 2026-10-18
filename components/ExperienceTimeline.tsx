@@ -22,8 +22,8 @@ export function ExperienceTimeline() {
             {experience.status === 'incoming' ? (
               <div className="experience-summary incoming-summary">
                 <span className="experience-title">
-                  <span className="role-title">{experience.position}</span>
-                  <span className="organization">{experience.company}<span className="experience-status">Incoming</span></span>
+                  <span className="role-title">{experience.position}<span className="experience-status">Incoming</span></span>
+                  <span className="organization">{experience.company}</span>
                   <span className="incoming-location">{experience.location}</span>
                 </span>
                 <span className="experience-period"><span className="sr-only">Starts </span>{experience.period}</span>
@@ -31,8 +31,8 @@ export function ExperienceTimeline() {
             ) : <details>
               <summary className="experience-summary">
                 <span className="experience-title">
-                  <span className="role-title">{experience.position}</span>
-                  <span className="organization">{experience.company}{experience.status === 'current' && <span className="experience-status">Current</span>}</span>
+                  <span className="role-title">{experience.position}{experience.status === 'current' && <span className="experience-status">Current</span>}</span>
+                  <span className="organization">{experience.company}</span>
                 </span>
                 <span className="experience-period">{experience.period}</span>
                 <span className="disclosure-icon" aria-hidden="true" />

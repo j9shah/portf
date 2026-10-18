@@ -1,6 +1,13 @@
 export const personalInfo = {
   name: "Jainam Shah",
-  introduction: "Computer Science co-op student at Toronto Metropolitan University and aspiring full-stack developer.",
+  introduction: "Computer Science co-op student at Toronto Metropolitan University.",
+  interests: [
+    "Software engineering",
+    "Full-stack development",
+    "Cybersecurity",
+    "Machine learning",
+    "Building things that matter",
+  ] as const,
   location: "Toronto, Ontario",
   url: "https://j9shah.me",
 };
@@ -46,7 +53,7 @@ export const experiences: Experience[] = [
   {
     id: "opg",
     company: "Ontario Power Generation",
-    position: "Cybersecurity Operations Intern",
+    position: "Security Operations Center (SOC) Analyst",
     status: "past",
     period: "Sep 2025 – Apr 2026",
     location: "Toronto, Ontario",

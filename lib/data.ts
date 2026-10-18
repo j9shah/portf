@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Jainam Shah",
-  introduction: "Computer Science co-op student at Toronto Metropolitan University.",
+  introduction: "Computer Science Co-op student at Toronto Metropolitan University.",
   interests: [
     "software engineering",
     "full-stack development",

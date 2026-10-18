@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+const PHRASE_PAUSE_MS = 2650;
+
 export function HeroInterests({ phrases }: { phrases: readonly [string, ...string[]] }) {
   const [text, setText] = useState(phrases[0]);
 
@@ -24,7 +26,7 @@ export function HeroInterests({ phrases }: { phrases: readonly [string, ...strin
         delay = 300;
       } else if (!deleting && characterCount === phrase.length) {
         deleting = true;
-        delay = 1900;
+        delay = PHRASE_PAUSE_MS;
       }
       timer = window.setTimeout(tick, delay);
     }
@@ -35,7 +37,7 @@ export function HeroInterests({ phrases }: { phrases: readonly [string, ...strin
       characterCount = phrases[0].length;
       deleting = true;
       setText(phrases[0]);
-      if (!motionPreference.matches) timer = window.setTimeout(tick, 1900);
+      if (!motionPreference.matches) timer = window.setTimeout(tick, PHRASE_PAUSE_MS);
     }
 
     restart();

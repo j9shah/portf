@@ -1,135 +1,121 @@
 export const personalInfo = {
   name: "Jainam Shah",
-  title: "CS Undergraduate",
+  introduction: "Computer Science co-op student at Toronto Metropolitan University and aspiring full-stack developer.",
+  location: "Toronto, Ontario",
+  url: "https://j9shah.me",
 };
 
 export type Experience = {
   id: string;
   company: string;
   position: string;
-  specialty?: string;
-  type?: string;
+  status: "incoming" | "current" | "past";
   period: string;
-  duration?: string;
-  location?: string;
-  workMode?: string;
-  description?: string;
-  technologies?: string[];
-  featured?: boolean;
+  location: string;
+  highlights: string[];
+  technologies: string[];
   link?: string;
 };
 
 export const experiences: Experience[] = [
   {
+    id: "cgi",
+    company: "CGI",
+    position: "Junior Software Developer (Co-op)",
+    status: "incoming",
+    period: "Jan 2027",
+    location: "Markham, Ontario",
+    highlights: [],
+    technologies: [],
+  },
+  {
+    id: "beacon",
+    company: "BEACON Research Group · Toronto Metropolitan University",
+    position: "Software Engineer",
+    status: "current",
+    period: "May 2026 – Present",
+    location: "Toronto, Ontario",
+    highlights: [
+      "Developed Python microservices for a Kafka-based smart-building platform, processing real-time sensor data for analytics and machine-learning workflows.",
+      "Built Kafka-to-PostgreSQL ingestion services with SQLAlchemy, including automatic schema initialization and persistence for telemetry and analytics metadata.",
+      "Containerized and integrated backend services with Docker Compose across an architecture of 11 microservices.",
+    ],
+    technologies: ["Python", "Kafka", "PostgreSQL", "SQLAlchemy", "Docker Compose"],
+    link: "https://www.torontomu.ca/beacon/",
+  },
+  {
     id: "opg",
     company: "Ontario Power Generation",
     position: "Cybersecurity Operations Intern",
-    type: "Internship",
-    period: "Sept 2025 – Present",
-    location: "Toronto, Ontario, Canada",
-    description: "Supported enterprise security operations by investigating phishing incidents, analyzing threat indicators, and automating triage workflows using Python and Microsoft security tools.",
-    technologies: ["Microsoft Defender", "Microsoft Sentinel (KQL)", "Python"],
-    featured: true,
+    status: "past",
+    period: "Sep 2025 – Apr 2026",
+    location: "Toronto, Ontario",
+    highlights: [
+      "Investigated 50+ phishing reports weekly and correlated threat intelligence with Microsoft Defender, Sentinel, and KQL to assess incident scope and risk.",
+      "Automated IOC parsing, normalization, and reputation lookups with Python, reducing repetitive phishing triage work by approximately 30%.",
+    ],
+    technologies: ["Python", "Microsoft Defender", "Microsoft Sentinel", "KQL"],
   },
   {
     id: "crl",
-    company: "TMU Cybersecurity Research Lab",
+    company: "Cybersecurity Research Lab · Toronto Metropolitan University",
     position: "Research Assistant",
-    specialty: "(Applied Machine Learning)",
-    type: "Research",
+    status: "past",
     period: "May 2024 – Aug 2025",
-    location: "Toronto, Ontario, Canada",
-    description: "Supported senior researchers by developing data pipelines and NLP models, improving data reliability and contributing to applied machine learning workflows across multiple datasets.",
-    technologies: ["Python", "JavaScript (Google Apps Script)", "SpaCy", "NLTK", "Selenium", "NumPy", "Pandas"],
-    featured: true,
+    location: "Toronto, Ontario",
+    highlights: [
+      "Built 8 Python web scrapers with Selenium, Pandas, and NumPy to collect, clean, and structure data from Twitter/X, GitHub, and Google News for research analysis.",
+      "Automated internal workflows with JavaScript and Google Apps Script, reducing manual effort by 70% and improving data reliability.",
+    ],
+    technologies: ["Python", "Selenium", "Pandas", "NumPy", "JavaScript", "Google Apps Script"],
     link: "https://www.torontomu.ca/tedrogersschool/cybersecurity-research-lab/",
-  },
-  {
-    id: "tutorbright",
-    company: "TutorBright",
-    position: "Academic Tutor",
-    type: "Contract Part-time",
-    period: "Sep 2023 – Sep 2024",
-    duration: "1 yr 1 mo",
-    location: "Toronto, Ontario, Canada",
-    description: "Provided personalized academic tutoring to students across various subjects, developing customized learning plans and tracking progress.",
-  },
-  {
-    id: "tdsb",
-    company: "Toronto District School Board",
-    position: "Math Tutor",
-    type: "Contract Part-time",
-    period: "May 2022 – Jun 2022",
-    duration: "2 mos",
-    location: "Toronto, Ontario, Canada",
-    workMode: "Hybrid",
-    description: "Tutored high school students in mathematics, helping them prepare for exams and improve their problem-solving skills.",
-  },
-  {
-    id: "banana-republic",
-    company: "Banana Republic",
-    position: "Retail Associate",
-    type: "Permanent Part-time",
-    period: "Aug 2021 – Jan 2023",
-    duration: "1 yr 6 mos",
-    location: "Toronto, Ontario, Canada",
-    workMode: "On-site",
-    description: "Delivered excellent customer service in a fast-paced retail environment, managing inventory and visual merchandising.",
-  },
-  {
-    id: "regent-medical",
-    company: "Regent Medical Clinic",
-    position: "Office Administrator",
-    type: "Permanent Part-time",
-    period: "Aug 2018 – Feb 2022",
-    duration: "3 yrs 7 mos",
-    location: "Toronto, Ontario, Canada",
-    workMode: "On-site",
-    description: "Managed patient scheduling, medical records, and front desk operations. Handled administrative tasks and coordinated with healthcare staff.",
   },
 ];
 
 export type Project = {
   id: string;
+  display: "featured" | "archive";
   name: string;
   description: string;
-  features?: string[];
+  features: string[];
   tech: string[];
   github: string | null;
   demo: string | null;
   devpost: string | null;
-  featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
     id: "algoware",
+    display: "featured",
     name: "Algoware",
-    description: "Chrome extension that audits YouTube recommendations by revealing topic and sentiment trends, promoting algorithmic transparency.",
+    description: "A Chrome extension that makes YouTube recommendations easier to understand through topic and sentiment analysis.",
     features: [
-      "Fine-tuned BERT model for 26-category topic classification with Flask backend",
-      "Client-side JavaScript scraper analyzing 20 recommendations in ~12 seconds",
+      "Led a four-person team, using Manifest V3 content scripts and service workers to coordinate inference and visualize results.",
+      "Built a Flask API with a fine-tuned BERT model for 26-class topic classification and Google Cloud Natural Language for sentiment analysis.",
     ],
-    tech: ["Python", "PyTorch", "BERT", "Flask", "JavaScript"],
-    github: "https://github.com/j9shah/algoware",
+    tech: ["Python", "Flask", "PyTorch", "BERT", "JavaScript", "HTML/CSS"],
+    github: "https://github.com/e-laflamme/Algoware",
     demo: null,
     devpost: "https://devpost.com/software/algowhere",
   },
   {
     id: "lumina",
+    display: "featured",
     name: "Lumina",
-    description: "Real-time collaborative drawing app with live cursor tracking and presence awareness across ephemeral sessions.",
+    description: "A real-time collaborative drawing application with shared strokes, live cursors, and presence awareness.",
     features: [
-      "Supabase Realtime Channels broadcasting drawing events with no database storage",
-      "Interactive HTML5 Canvas editor with multiple tools, undo/redo, and export functionality",
+      "Synchronizes drawing events and user presence for up to 200 concurrent users.",
+      "Built with Next.js, TypeScript, and Supabase Realtime and Auth.",
     ],
-    tech: ["TypeScript", "Next.js", "Supabase", "Tailwind CSS"],
+    tech: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
     github: "https://github.com/j9shah/lumina",
     demo: "https://lumina-olive.vercel.app/",
     devpost: null,
   },
   {
     id: "skincare-recommender",
+    display: "archive",
     name: "Skincare Recommender",
     description: "Python-based application helping users find skincare products tailored to their skin type, budget, and preferences using graph-based recommendations.",
     features: [
@@ -143,6 +129,7 @@ export const projects: Project[] = [
   },
   {
     id: "citco",
+    display: "archive",
     name: "Citco",
     description: "Web application investigating correlation between individual researchers' citation counts and NSERC Discovery Grant funding amounts.",
     features: [
@@ -156,6 +143,7 @@ export const projects: Project[] = [
   },
   {
     id: "newsnest",
+    display: "archive",
     name: "NewsNest",
     description: "MERN stack news aggregation platform allowing users to explore, save, and manage articles with JWT authentication and NewsAPI integration.",
     features: [
@@ -169,8 +157,31 @@ export const projects: Project[] = [
   },
 ];
 
+export const education = {
+  institution: "Toronto Metropolitan University",
+  degree: "B.Sc. (Hons) in Computer Science, Co-op",
+  graduation: "Expected Apr 2028",
+  gpa: "3.97 / 4.33",
+  coursework: ["Data Structures & Algorithms", "Artificial Intelligence I", "Discrete Mathematics"],
+};
+
+export const skillGroups = [
+  {
+    label: "Languages",
+    skills: ["Python", "Java", "JavaScript", "TypeScript", "SQL", "C/C++", "Bash", "HTML/CSS"],
+  },
+  {
+    label: "Frameworks & libraries",
+    skills: ["React", "Next.js", "Flask", "SQLAlchemy", "PyTorch", "Hugging Face Transformers", "scikit-learn", "Pandas", "NumPy", "spaCy", "NLTK", "Selenium"],
+  },
+  {
+    label: "Tools & platforms",
+    skills: ["Git", "GitHub", "Docker", "Kafka", "PostgreSQL", "Linux/Unix", "Supabase", "MySQL", "MongoDB", "AWS", "Jupyter Notebook", "Power BI", "Vercel"],
+  },
+];
+
 export const socials = {
-  email: "j9shah@torontomu.ca",
+  email: "j9shah9@gmail.com",
   linkedin: "https://linkedin.com/in/j9shah",
   github: "https://github.com/j9shah",
 };

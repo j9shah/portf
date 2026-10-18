@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { CursorGlow } from "@/components/CursorGlow";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,15 +48,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <head>
-        {/* Preload critical resources */}
-        <link rel="preload" as="style" href="/globals.css" />
-      </head>
-      <body suppressHydrationWarning style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }} className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <CursorGlow />
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

@@ -9,9 +9,9 @@ function ProjectEntry({ project, archived = false }: { project: Project; archive
       <ul className="project-highlights">{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
       <p className="technology-list">{project.tech.join(' · ')}</p>
       <div className="project-links" aria-label={`${project.name} links`}>
-        {project.github && <a className="text-link" href={project.github} aria-label={`${project.name} source on GitHub`}>Source <span aria-hidden="true">↗</span></a>}
-        {project.demo && <a className="text-link" href={project.demo} aria-label={`${project.name} live site`}>Live site <span aria-hidden="true">↗</span></a>}
-        {project.devpost && <a className="text-link" href={project.devpost} aria-label={`${project.name} on Devpost`}>Devpost <span aria-hidden="true">↗</span></a>}
+        {project.github && <a className="text-link" href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} source on GitHub`}>Source <span aria-hidden="true">↗</span></a>}
+        {project.demo && <a className="text-link" href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} live site`}>Live site <span aria-hidden="true">↗</span></a>}
+        {project.devpost && <a className="text-link" href={project.devpost} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} on Devpost`}>Devpost <span aria-hidden="true">↗</span></a>}
       </div>
     </article>
   );

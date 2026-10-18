@@ -35,7 +35,7 @@ function ExperienceDetails({ experience }: { experience: Experience }) {
         <p className="technology-list">{experience.technologies.join(' · ')}</p>
       )}
       {experience.link && (
-        <a className="text-link" href={experience.link}>
+        <a className="text-link" href={experience.link} target="_blank" rel="noopener noreferrer">
           Visit organization <span aria-hidden="true">↗</span>
         </a>
       )}

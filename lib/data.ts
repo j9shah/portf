@@ -181,7 +181,7 @@ export const skillGroups = [
 ];
 
 export const socials = {
-  email: "j9shah9@gmail.com",
+  email: "j9shah@torontomu.ca",
   linkedin: "https://linkedin.com/in/j9shah",
   github: "https://github.com/j9shah",
 };

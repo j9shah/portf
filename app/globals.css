@@ -134,8 +134,8 @@
   .contact-section { margin-bottom: 4.5rem; }
   .contact-section .section-heading { margin-bottom: 0.875rem; }
   .contact-description { color: var(--text-secondary); font-size: 0.875rem; }
-  .contact-email { margin-top: 1.125rem; font-size: clamp(1.0625rem, 3vw, 1.25rem); letter-spacing: -0.025em; }
-  .social-links { display: flex; gap: 1.5rem; margin-top: 1rem; font-size: 0.8125rem; }
+  .contact-email { margin-top: 1.125rem; min-height: 2.75rem; align-items: center; font-size: 0.875rem; }
+  .social-links { display: flex; gap: 1.5rem; margin-top: 0.5rem; font-size: 0.8125rem; }
   .social-links a { min-height: 2.75rem; align-items: center; }
   .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.6875rem; }
   .site-footer a { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2.75rem; }

@@ -11,9 +11,7 @@ function ExperienceHeader({ experience }: { experience: Experience }) {
           {status && <span className="experience-status">{status}</span>}
         </span>
         <span className="organization">{experience.company}</span>
-        {experience.status === 'incoming' && (
-          <span className="incoming-location">{experience.location}</span>
-        )}
+        <span className="experience-location">{experience.location}</span>
       </span>
       <span className="experience-period">
         {experience.status === 'incoming' && <span className="sr-only">Starts </span>}
@@ -27,7 +25,6 @@ function ExperienceHeader({ experience }: { experience: Experience }) {
 function ExperienceDetails({ experience }: { experience: Experience }) {
   return (
     <div className="experience-details">
-      <p className="detail-location">{experience.location}</p>
       <ul className="experience-highlights">
         {experience.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
       </ul>

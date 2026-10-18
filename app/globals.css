@@ -92,14 +92,13 @@
   .organization { display: block; margin-top: 0.25rem; color: var(--text-secondary); font-size: 0.8125rem; line-height: 1.6; }
   .experience-status { color: var(--accent-text); font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
   .experience-period { padding-top: 0.1875rem; color: var(--text-muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .incoming-location { display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 0.1875rem; }
-  .disclosure-icon { position: relative; width: 0.75rem; height: 0.75rem; margin-top: 0.375rem; color: var(--text-muted); }
+  .experience-location { display: block; color: var(--text-muted); font-size: 0.75rem; margin-top: 0.1875rem; }
+  .disclosure-icon { position: relative; width: 0.75rem; height: 0.75rem; margin-top: 0.375rem; color: var(--accent-text); }
   .disclosure-icon::before, .disclosure-icon::after { position: absolute; content: ''; top: 50%; left: 0; width: 0.625rem; height: 1px; background: currentColor; }
   .disclosure-icon::after { transform: rotate(90deg); transition: transform 150ms ease; }
   details[open] > summary .disclosure-icon::after { transform: rotate(0); }
   summary.experience-summary:hover .role-title, summary.experience-summary:hover .disclosure-icon { color: var(--accent-text); }
   .experience-details { max-width: 42rem; padding: 0 1.75rem 1.5rem 0; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; }
-  .detail-location { margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.75rem; }
   .experience-highlights { list-style: disc; padding-left: 1rem; margin-bottom: 1rem; }
   .experience-highlights li + li { margin-top: 0.625rem; }
   .experience-highlights li::marker { color: var(--text-muted); font-size: 0.75em; }

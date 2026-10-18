@@ -34,7 +34,7 @@ The existing Vercel configuration installs from the lockfile and runs the Next.j
 
 Theme colors and layout live in `app/globals.css`. The three `--accent*` tokens in the light/dark palettes control all blue accents; replace them with neutral colors for a monochrome design. The theme follows the system until a visitor selects a preference, which is remembered locally.
 
-`app/icon.svg` is the owl source used by the header, favicon, and social previews. `app/apple-icon.png` is its touch-icon rendering. Both social-image routes share `lib/social-image.tsx`; their text follows the profile data.
+`app/icon.svg` is the owl source used by the header, favicon, and social previews. `app/apple-icon.png` is its touch-icon rendering. Both social-image routes share `lib/social-image.tsx`, a static cover matching the site's dark hero. Name, location, introduction, and domain follow the profile data. Inter fonts are bundled in `assets/fonts` with their SIL Open Font License so preview generation needs no font request at runtime.
 
 ## Manual verification
 

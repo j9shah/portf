@@ -58,10 +58,11 @@ export const experiences: Experience[] = [
     period: "Sep 2025 – Apr 2026",
     location: "Toronto, Ontario",
     highlights: [
-      "Investigated 50+ phishing reports weekly and correlated threat intelligence with Microsoft Defender, Sentinel, and KQL to assess incident scope and risk.",
-      "Automated IOC parsing, normalization, and reputation lookups with Python, reducing repetitive phishing triage work by approximately 30%.",
+      "Investigated 50+ phishing reports weekly using Cofense Reporter, Microsoft Defender, Microsoft Sentinel, and KQL to assess incident scope and organizational risk.",
+      "Correlated and enriched hundreds of indicators of compromise (IOCs) from threat intelligence feeds, integrated findings into Microsoft Defender Threat Intelligence, and maintained detailed case records.",
+      "Built Python scripts to automate IOC parsing, normalization, and reputation lookups, reducing repetitive triage effort by approximately 30%.",
     ],
-    technologies: ["Python", "Microsoft Defender", "Microsoft Sentinel", "KQL"],
+    technologies: ["Python", "Cofense Reporter", "Microsoft Defender", "Microsoft Sentinel", "Microsoft Defender Threat Intelligence", "KQL"],
   },
   {
     id: "crl",

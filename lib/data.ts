@@ -45,10 +45,10 @@ export const experiences: Experience[] = [
     location: "Toronto, Ontario",
     highlights: [
       "Developed Python microservices for a Kafka-based smart-building platform, processing real-time sensor data for analytics and machine-learning workflows.",
-      "Built Kafka-to-PostgreSQL ingestion services with SQLAlchemy, including automatic schema initialization and persistence for telemetry and analytics metadata.",
-      "Containerized and integrated backend services with Docker Compose across an architecture of 11 microservices.",
+      "Built Kafka-to-PostgreSQL ingestion services using SQLAlchemy, automating database schema initialization and persisting telemetry and analytics metadata.",
+      "Containerized and integrated backend services with Docker Compose within an 11 - microservice architecture.",
     ],
-    technologies: ["Python", "Kafka", "PostgreSQL", "SQLAlchemy", "Docker Compose"],
+    technologies: ["Python", "Apache Kafka", "PostgreSQL", "SQLAlchemy", "Docker Compose", "Git"],
     link: "https://www.torontomu.ca/beacon/",
   },
   {
@@ -59,11 +59,12 @@ export const experiences: Experience[] = [
     period: "Sep 2025 – Apr 2026",
     location: "Toronto, Ontario",
     highlights: [
-      "Investigated 50+ phishing reports weekly using Cofense Reporter, Microsoft Defender, Microsoft Sentinel, and KQL to assess incident scope and organizational risk.",
-      "Correlated and enriched hundreds of indicators of compromise (IOCs) from threat intelligence feeds, integrated findings into Microsoft Defender Threat Intelligence, and maintained detailed case records.",
+      "Investigated 50+ phishing reports weekly using Cofense Reporter, Microsoft Defender, VirusTotal, and Microsoft Sentinel to identify malicious indicators and assess organizational risk.",
+      "Correlated and enriched hundreds of indicators of compromise (IOCs) using threat intelligence sources, Splunk, and KQL, documenting findings and tracking security incidents through ServiceNow.",
       "Built Python scripts to automate IOC parsing, normalization, and reputation lookups, reducing repetitive triage effort by approximately 30%.",
+      "Provisioned privileged accounts using CyberArk, supporting secure access management and administrative access controls.",
     ],
-    technologies: ["Python", "Cofense Reporter", "Microsoft Defender", "Microsoft Sentinel", "Microsoft Defender Threat Intelligence", "KQL"],
+    technologies: ["Microsoft Sentinel", "Microsoft Defender", "Cofense Reporter", "Splunk", "KQL", "Python", "VirusTotal", "Wireshark", "CyberArk", "ServiceNow", "Microsoft Office"],
   },
   {
     id: "crl",
@@ -74,9 +75,11 @@ export const experiences: Experience[] = [
     location: "Toronto, Ontario",
     highlights: [
       "Built 8 Python web scrapers with Selenium, Pandas, and NumPy to collect, clean, and structure data from Twitter/X, GitHub, and Google News for research analysis.",
-      "Automated internal workflows with JavaScript and Google Apps Script, reducing manual effort by 70% and improving data reliability.",
+      "Developed NLP preprocessing pipelines using spaCy and NLTK to clean, normalize, and prepare large text datasets for analysis.",
+      "Applied existing machine learning and NLP models to processed datasets to identify patterns, extract research insights, and visualize findings with Matplotlib.",
+      "Automated internal workflows using JavaScript and Google Apps Script, reducing manual effort by 70% and improving data reliability.",
     ],
-    technologies: ["Python", "Selenium", "Pandas", "NumPy", "JavaScript", "Google Apps Script"],
+    technologies: ["Python", "JavaScript", "scikit-learn", "PyTorch", "Hugging Face Transformers", "Git", "GitHub", "Google Apps Script"],
     link: "https://www.torontomu.ca/tedrogersschool/cybersecurity-research-lab/",
   },
 ];

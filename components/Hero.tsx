@@ -7,7 +7,7 @@ export function Hero() {
       <p className="eyebrow"><span className="location-dot" aria-hidden="true" />{personalInfo.location}</p>
       <h1 id="intro-heading">{personalInfo.name}</h1>
       <p className="intro-description">{personalInfo.introduction}</p>
-      <HeroInterests phrases={personalInfo.interests} />
+      <HeroInterests phrases={personalInfo.interests} staticPhrase={personalInfo.interestsSummary} />
     </section>
   );
 }

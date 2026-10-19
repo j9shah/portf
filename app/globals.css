@@ -60,9 +60,10 @@
   .intro-interests { margin-top: 0.5rem; }
   .interest-line { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.3em; }
   .interest-words { display: inline-grid; min-width: 0; max-width: 100%; color: var(--accent-text); }
-  .interest-sizer, .interest-word, .interest-static { grid-area: 1 / 1; min-width: 0; overflow-wrap: anywhere; }
+  .interest-sizer, .interest-word { grid-area: 1 / 1; min-width: 0; overflow-wrap: anywhere; }
   .interest-sizer { visibility: hidden; }
-  .interest-static { display: none; }
+  .interest-static { display: none; overflow-wrap: anywhere; }
+  .interest-static-words { color: var(--accent-text); }
   .interest-sizer::after, .interest-word::after { content: ''; display: inline-block; width: 1px; height: 0.95em; margin-left: 0.15em; vertical-align: -0.08em; }
   .interest-word::after { background: var(--text-muted); animation: interest-cursor 1s step-end infinite; }
 
@@ -180,7 +181,7 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
-  .interest-word { display: none; }
+  .interest-line { display: none; }
   .interest-word::after { animation: none; }
   .interest-static { display: block; }
 }

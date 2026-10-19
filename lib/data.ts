@@ -8,6 +8,7 @@ export const personalInfo = {
     "machine learning ...",
     "building things that matter !!!",
   ] as const,
+  interestsSummary: "software, security, and machine learning.",
   location: "Toronto, Ontario",
   url: "https://j9shah.me",
 };

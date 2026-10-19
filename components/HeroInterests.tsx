@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-const PHRASE_PAUSE_MS = 2650;
+const PHRASE_PAUSE_MS = 2000;
 
-export function HeroInterests({ phrases }: { phrases: readonly [string, ...string[]] }) {
+export function HeroInterests({ phrases, staticPhrase }: {
+  phrases: readonly [string, ...string[]];
+  staticPhrase: string;
+}) {
   const [text, setText] = useState(phrases[0]);
 
   useEffect(() => {
@@ -48,18 +51,18 @@ export function HeroInterests({ phrases }: { phrases: readonly [string, ...strin
     };
   }, [phrases]);
 
-  const accessibleInterests = `${phrases.slice(0, -1).join(', ')}, and ${phrases[phrases.length - 1]}`;
-
   return (
     <p className="intro-description intro-interests">
-      <span className="sr-only">Interested in {accessibleInterests}.</span>
+      <span className="sr-only">Interested in {staticPhrase}</span>
       <span className="interest-line" aria-hidden="true">
         <span>Interested in</span>
         <span className="interest-words">
           {phrases.map((phrase) => <span className="interest-sizer" key={phrase}>{phrase}</span>)}
           <span className="interest-word">{text}</span>
-          <span className="interest-static">{phrases[0]}</span>
         </span>
+      </span>
+      <span className="interest-static" aria-hidden="true">
+        Interested in <span className="interest-static-words">{staticPhrase}</span>
       </span>
     </p>
   );
